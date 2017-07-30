@@ -1,0 +1,26 @@
+{% extends '_layouts/base.html' %}
+
+{% block headline %}
+    <div class="jumbotron"><h1>All Albums</h1></div>
+{% endblock headline %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6">
+            <ul class="list-group">
+                {% for object in object_list %}
+                    <li class="list-group-item">
+                        <span class="badge">{{ object.song_count }}</span>>
+                        <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">You have no albums</li>
+                {% endfor %}
+            </ul>
+        </div>
+{#    TODO: add album create functionality#}
+{#        <div class="col-sm-6">#}
+{#            <p><a href="{% url 'talks:lists:create' %}" class="btn">Create a new list</a></p>#}
+{#        </div>#}
+    </div>
+{% endblock %}

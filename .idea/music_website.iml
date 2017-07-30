@@ -4,7 +4,7 @@
     <facet type="django" name="Django">
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$/src" />
-        <option name="settingsModule" value="website/settings.py" />
+        <option name="settingsModule" value="music_website/settings.py" />
         <option name="manageScript" value="manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
       </configuration>
@@ -21,8 +21,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/src/templates" />
-        <option value="$MODULE_DIR$/src/music/templates" />
+        <option value="$MODULE_DIR$/../website/src/templates" />
+        <option value="$MODULE_DIR$/../website/src/music/templates" />
       </list>
     </option>
   </component>
