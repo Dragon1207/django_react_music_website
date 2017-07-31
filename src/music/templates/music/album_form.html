@@ -10,7 +10,7 @@
                 <ul class="list-group">
                     {% for song in object.songs.all %}
                         <li class="list-group-item">
-                            <input type="radio" id="id_favorite_songs_{{ forloop.counter }}" name="favorite_song" value="{{ song.id }}" {% if song.is_favorite %}checked{% endif %}/>
+                            <input type="radio" id="id_favorite_songs_{{ forloop.counter }}" name="favorite_song" value="{{ song.id }}" {% if forloop.counter == 1 %}checked{% endif %}/>
                             <label for="song{{ forloop.counter }}">
                                 <a href="{{ object.get_absolute_url }}">{{ song.song_title }} - {{ song.file_type }}</a>
                                 {% if song.is_favorite %}

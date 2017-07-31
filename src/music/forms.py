@@ -22,4 +22,4 @@ class AlbumFavoriteForm(forms.Form):
             raise ValueError(
                 "The AlbumFavoriteForm could not be saved because the data didn't validate."
             )
-        self.instance.favorite_song = self.cleaned_data['favorite_song']
+        self.instance.set_favorite_song(self.cleaned_data['favorite_song'])
