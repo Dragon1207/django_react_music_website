@@ -19,6 +19,12 @@ class AlbumDetailView(generic.DetailView, generic.UpdateView):
     model = Album
     http_method_names = ['get', 'post']
     form_class = forms.AlbumFavoriteForm
+    template_name = 'music/album_detail.html'
 
     def get_success_url(self):
         return reverse('album_detail', kwargs=self.kwargs)
+
+
+class AlbumCreateView(generic.CreateView):
+    model = Album
+    fields = ('artist', 'album_title', 'genre', 'album_logo',)

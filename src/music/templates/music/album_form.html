@@ -1,29 +1,26 @@
 {% extends '_layouts/base.html' %}
+{% block title %}Add a New Album{% endblock %}
+{% block albums_active %}active{% endblock %}
+
 
 {% block content %}
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <img src="{{ object.album_logo }}">
-            <h1>{{ object.album_title }}</h1>
-            <h2>{{ object.artist }}</h2>
-            <form action="" method="post">{% csrf_token %}
-                <ul class="list-group">
-                    {% for song in object.songs.all %}
-                        <li class="list-group-item">
-                            <input type="radio" id="id_favorite_songs_{{ forloop.counter }}" name="favorite_song" value="{{ song.id }}" {% if forloop.counter == 1 %}checked{% endif %}/>
-                            <label for="song{{ forloop.counter }}">
-                                <a href="{{ object.get_absolute_url }}">{{ song.song_title }} - {{ song.file_type }}</a>
-                                {% if song.is_favorite %}
-                                    <img src="http://i.imgur.com/b9b13Rd.png"/>
-                                {% endif %}
-                            </label><br>
-                        </li>
-                        {% empty %}
-                        <li class="list-group-item">Album has no songs</li>
-                    {% endfor %}
-                </ul>
-                <input type="submit" value="Favorite" class="btn btn-default"/>
-            </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% include 'music/form-template.html' %}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

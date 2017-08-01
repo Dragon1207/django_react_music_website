@@ -1,6 +1,5 @@
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q
 
 
 class Album(models.Model):
