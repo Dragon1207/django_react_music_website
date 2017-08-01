@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <img src="{{ object.album_logo }}">
+            <img src="{{ object.album_logo.url }}">
             <h1>{{ object.album_title }}</h1>
             <h2>{{ object.artist }}</h2>
             <form action="" method="post">{% csrf_token %}
