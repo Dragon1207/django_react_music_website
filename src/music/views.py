@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
 from django.urls import reverse
 from django.views import generic
@@ -28,3 +29,13 @@ class AlbumDetailView(generic.DetailView, generic.UpdateView):
 class AlbumCreateView(generic.CreateView):
     model = Album
     fields = ('artist', 'album_title', 'genre', 'album_logo',)
+
+
+class AlbumUpdateView(generic.UpdateView):
+    model = Album
+    fields = ('artist', 'album_title', 'genre', 'album_logo',)
+
+
+class AlbumDeleteView(generic.DeleteView):
+    model = Album
+    success_url = reverse_lazy('music:album_list')
