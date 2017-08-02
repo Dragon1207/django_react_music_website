@@ -26,7 +26,7 @@ SECRET_KEY = 'uh_p8w$eo6%%tf5)d43b2y))88qxf2&t9-s=osvq46u#3ya^p+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-music-website.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
