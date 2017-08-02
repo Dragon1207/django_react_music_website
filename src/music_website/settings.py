@@ -152,6 +152,8 @@ if DEBUG:
     STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'static'),)
     INTERNAL_IPS = ['127.0.0.1']
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # for allauth
 
 SITE_ID = 1
