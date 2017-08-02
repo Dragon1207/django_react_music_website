@@ -38,10 +38,28 @@
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Album
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout
-                </a>
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'account_logout' %}">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+                        </a>
+                    </li>
+                  {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Login
+                        </a>
+                    </li>
+                    <li><a href="{% url 'account_signup' %}">Signup</a></li>
+                  {% endif %}
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
             </li>
         </ul>
     </div><!--/.nav-collapse -->

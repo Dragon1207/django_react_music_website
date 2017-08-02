@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^music/', include('music.urls', namespace='music')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('music.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

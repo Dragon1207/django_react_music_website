@@ -1,0 +1,18 @@
+{% extends '_layouts/base.html' %}
+
+{% block headline %}<h1>Sign Out</h1>{% endblock %}
+
+{% block content %}
+    <div class='col-md-4 col-md-offset-4'>
+        <p>Are you sure you want to sign out?</p>
+
+        <form method="post" action="{% url 'account_logout' %}">{% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+          {% endif %}
+          <button type="submit">
+              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Sign Out
+          </button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
-from django.forms.widgets import RadioSelect
-from music.models import Album, Song
+
+from music.models import Album
 
 
 class AlbumFavoriteForm(forms.Form):
