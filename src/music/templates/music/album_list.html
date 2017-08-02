@@ -13,7 +13,7 @@
                         {{ album }}
                         <span class="badge">{{ album.song_count }}</span>>
 
-                        <a href="{{ album.get_absolute_url }}" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="{{ album.get_absolute_url }}" class="btn btn-default btn-sm">View Details</a>
 
                         <form action="{% url 'music:album_delete' album.id %}" method="post" style="display: inline">
                             {% csrf_token %}
