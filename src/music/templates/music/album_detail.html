@@ -1,14 +1,15 @@
 {% extends '_layouts/base.html' %}
+{% load thumbnail %}
 
-{% block title %}Album {{ object.album_title }} detail{% endblock %}
+{% block title %}Album {{ object }} detail{% endblock %}
 
-{% block headline %}<h2>{{ object.album_title }}</h2>{% endblock %}
+{% block headline %}<h2>Album {{ object }}</h2>{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             {% if object.album_logo %}
-                <img src="{{ object.album_logo.url }}">
+                <img src="{% thumbnail album.album_logo 300x300 %}"/>
             {% endif %}
             <h3>{{ object.artist }}</h3>
             <form action="" method="post">{% csrf_token %}

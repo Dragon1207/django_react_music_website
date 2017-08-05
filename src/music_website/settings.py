@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'easy_thumbnails',
 )
 LOCAL_APPS = (
     'music',
@@ -199,3 +200,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': False
     }
 }
+
+# for easy-thumbnails
+
+THUMBNAIL_SUBDIR = 'thumbnails'

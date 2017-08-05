@@ -1,4 +1,5 @@
 {% extends '_layouts/base.html' %}
+{% load thumbnail %}
 
 {% block title %}All Albums{% endblock title %}
 
@@ -10,10 +11,11 @@
             <ul class="list-group">
                 {% for album in album_list %}
                     <li class="list-group-item">
-                        {{ album }}
+                        <a href="{{ album.get_absolute_url }}">
+                            <img src="{% thumbnail album.album_logo 50x50 %}"/>
+                            {{ album }}
+                        </a>
                         <span class="badge">{{ album.song_count }}</span>>
-
-                        <a href="{{ album.get_absolute_url }}" class="btn btn-default btn-sm">View Details</a>
                         <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:album_delete' album.id %}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
