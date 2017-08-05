@@ -9,9 +9,9 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <ul class="list-group">
-                {% for album in album_list %}
+                {% for album in object_list %}
                     <li class="list-group-item">
-                        <a href="{{ album.get_absolute_url }}">
+                        <a href="{{ album.get_absolute_url }}?page={{ page_obj.number }}">
                             <img src="{% thumbnail album.album_logo 50x50 %}"/>
                             {{ album }}
                         </a>
@@ -24,6 +24,30 @@
                     <li class="list-group-item">You have no albums</li>
                 {% endfor %}
             </ul>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'music:album_list' page_obj.previous_page_number %}">&lt;</a>
+                        {% endif %}
+                        {% for pn in paginator.page_range %}
+                            {% if not forloop.first %}
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {% endif %}
+                            {% if page_obj.number != pn %}
+                                <a href="{% url 'music:album_list' pn %}">
+                            {% endif %}
+                            {{ pn }}
+                            {% if page_obj.number != pn %}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'music:album_list' page_obj.next_page_number %}">&gt;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -10,6 +10,7 @@ from music.models import Album
 
 class AlbumListView(generic.ListView):
     model = Album
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super(AlbumListView, self).get_queryset()
@@ -24,7 +25,12 @@ class AlbumDetailView(generic.DetailView, generic.UpdateView):
     template_name = 'music/album_detail.html'
 
     def get_success_url(self):
-        return reverse('album_detail', kwargs=self.kwargs)
+        return reverse('music:album_detail', kwargs=self.kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(AlbumDetailView, self).get_context_data(**kwargs)
+        context['page'] = self.request.GET.get('page', 1)
+        return context
 
 
 class AlbumCreateView(views.SetHeadlineMixin, generic.CreateView):
