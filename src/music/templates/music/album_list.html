@@ -16,14 +16,9 @@
                         <span class="badge">{{ album.song_count }}</span>>
 
                         <a href="{{ album.get_absolute_url }}" class="btn btn-default btn-sm">View Details</a>
-
-                        <form action="{% url 'music:album_delete' album.id %}" method="post" style="display: inline">
-                            {% csrf_token %}
-                            <input type="hidden" name="album_id" value="{{ album.id }}"/>
-                            <button type="submit" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </form>
+                        <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:album_delete' album.id %}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
                     </li>
                     {% empty %}
                     <li class="list-group-item">You have no albums</li>
