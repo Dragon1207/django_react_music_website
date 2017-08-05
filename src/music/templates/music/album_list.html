@@ -7,8 +7,6 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <p><a href="{% url 'music:album_create' %}" class="btn">Create a new album</a></p>
-
             <ul class="list-group">
                 {% for album in album_list %}
                     <li class="list-group-item">
