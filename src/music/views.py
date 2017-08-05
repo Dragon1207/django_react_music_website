@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
 from django.urls import reverse
 from django.views import generic
+from braces import views
 
 from music import forms
 from music.models import Album
@@ -26,14 +27,16 @@ class AlbumDetailView(generic.DetailView, generic.UpdateView):
         return reverse('album_detail', kwargs=self.kwargs)
 
 
-class AlbumCreateView(generic.CreateView):
+class AlbumCreateView(views.SetHeadlineMixin, generic.CreateView):
     model = Album
     fields = ('artist', 'album_title', 'genre', 'album_logo',)
+    headline = 'Add Album'
 
 
-class AlbumUpdateView(generic.UpdateView):
+class AlbumUpdateView(views.SetHeadlineMixin, generic.UpdateView):
     model = Album
     fields = ('artist', 'album_title', 'genre', 'album_logo',)
+    headline = 'Update Album'
 
 
 class AlbumDeleteView(generic.DeleteView):

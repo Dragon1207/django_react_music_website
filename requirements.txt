@@ -1,9 +1,9 @@
 Django==1.11.3
 dj-database-url==0.4.2
 django-allauth==0.32.0
-django-debug-toolbar==1.8
-django-crispy-forms==1.6.1
 django-braces==1.11.0
+django-crispy-forms==1.6.1
+django-debug-toolbar==1.8
 djangorestframework==3.6.3
 Pillow==4.2.1
 psycopg2==2.7.1
