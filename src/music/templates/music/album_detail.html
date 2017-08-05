@@ -1,11 +1,16 @@
 {% extends '_layouts/base.html' %}
 
+{% block title %}Album {{ object.album_title }} detail{% endblock %}
+
+{% block headline %}<h2>{{ object.album_title }}</h2>{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <img src="{{ object.album_logo.url }}">
-            <h1>{{ object.album_title }}</h1>
-            <h2>{{ object.artist }}</h2>
+            {% if object.album_logo %}
+                <img src="{{ object.album_logo.url }}">
+            {% endif %}
+            <h3>{{ object.artist }}</h3>
             <form action="" method="post">{% csrf_token %}
                 <ul class="list-group">
                     {% for song in object.songs.all %}

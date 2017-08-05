@@ -1,12 +1,14 @@
 {% extends '_layouts/base.html' %}
 
-{% block headline %}
-    <div class="jumbotron"><h1>All Albums</h1></div>
-{% endblock headline %}
+{% block title %}All Albums{% endblock title %}
+
+{% block headline %}<h2>All Albums</h2>{% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-sm-offset-3">
+            <p><a href="{% url 'music:album_create' %}" class="btn">Create a new list</a></p>
+
             <ul class="list-group">
                 {% for album in album_list %}
                     <li class="list-group-item">
@@ -27,9 +29,6 @@
                     <li class="list-group-item">You have no albums</li>
                 {% endfor %}
             </ul>
-        </div>
-        <div class="col-sm-6">
-            <p><a href="{% url 'music:album_create' %}" class="btn">Create a new list</a></p>
         </div>
     </div>
 {% endblock %}
