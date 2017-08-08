@@ -30,7 +30,7 @@
                 </ul>
                 <input type="submit" value="Favorite" class="btn btn-default"/>
             </form>
-            <a href="{% url 'music:album_list' page %}"><< Go Back</a>
+            <a href="{% url 'music:album_list' %}?page={{ page }}"><< Go Back</a>
         </div>
     </div>
 {% endblock %}
