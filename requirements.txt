@@ -5,6 +5,7 @@ django-braces==1.11.0
 django-crispy-forms==1.6.1
 django-debug-toolbar==1.8
 djangorestframework==3.6.3
+django-taggit==0.22.1
 easy-thumbnails==2.4.1
 Pillow==4.2.1
 psycopg2==2.7.1

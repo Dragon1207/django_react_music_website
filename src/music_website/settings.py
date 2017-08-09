@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',
     'rest_framework',
     'easy_thumbnails',
+    'taggit',
 )
 LOCAL_APPS = (
     'music',
