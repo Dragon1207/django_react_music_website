@@ -35,13 +35,13 @@ class AlbumDetailView(generic.DetailView, generic.UpdateView):
 
 class AlbumCreateView(views.SetHeadlineMixin, generic.CreateView):
     model = Album
-    fields = ('artist', 'album_title', 'genre', 'album_logo', 'tags')
+    form_class = forms.AlbumForm
     headline = 'Add Album'
 
 
 class AlbumUpdateView(views.SetHeadlineMixin, generic.UpdateView):
     model = Album
-    fields = ('artist', 'album_title', 'genre', 'album_logo', 'tags')
+    form_class = forms.AlbumForm
     headline = 'Update Album'
 
 

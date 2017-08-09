@@ -1,4 +1,5 @@
 {% extends '_layouts/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Add a New Album{% endblock %}
 
@@ -10,15 +11,7 @@
             <div class="col-sm-12 col-md-7">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% include 'music/form-template.html' %}
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                        {% crispy form %}
                     </div>
                 </div>
             </div>

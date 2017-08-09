@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, ButtonHolder, Submit
 
 from music.models import Album
 
@@ -23,3 +25,19 @@ class AlbumFavoriteForm(forms.Form):
                 "The AlbumFavoriteForm could not be saved because the data didn't validate."
             )
         self.instance.set_favorite_song(self.cleaned_data['favorite_song'])
+
+
+class AlbumForm(forms.ModelForm):
+    class Meta:
+        model = Album
+        fields = ('artist', 'album_title', 'genre', 'album_logo', 'tags')
+
+    def __init__(self, *args, **kwargs):
+        super(AlbumForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+                'artist', 'album_title', 'genre', 'album_logo', 'tags',
+                ButtonHolder(
+                        Submit('submit', 'Submit', css_class='btn btn-default')
+                )
+        )
