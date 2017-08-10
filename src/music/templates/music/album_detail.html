@@ -3,7 +3,16 @@
 
 {% block title %}Album {{ object }} detail{% endblock %}
 
-{% block headline %}<h2>Album {{ object }}</h2>{% endblock %}
+{% block headline %}<h2>Album {{ object }}</h2>
+    {% with names=object.tags.names %}
+        {% if names.count > 0 %}
+            <p>Tags: {% for name in names %}{% if not forloop.first %}, {% endif %}
+                <a href="{% url 'music:album_list' %}{% query_builder request tags=name page=None %}">{{ name }}</a>
+            {% endfor %}</p>
+            <br>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -30,7 +39,7 @@
                 </ul>
                 <input type="submit" value="Favorite" class="btn btn-default"/>
             </form>
-            <a href="{% url 'music:album_list' %}?page={{ page | urlencode }}"><< Go Back</a>
+            <a href="{% url 'music:album_list' %}{% query_builder request %}"><< Go Back</a>
         </div>
     </div>
 {% endblock %}

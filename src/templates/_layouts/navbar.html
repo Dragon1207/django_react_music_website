@@ -15,14 +15,12 @@
             {% url 'music:album_list' as home %}
             <li {% if request.path == home %} class="active" {% endif %}>
                 <a href="{% url 'music:album_list' %}">
-                    <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;
-                    Albums
+                    <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Albums
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;
-                    Songs
+                    <span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;Songs
                 </a>
             </li>
         </ul>
@@ -34,7 +32,7 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="{% url 'music:album_create' %}">
+                <a href="{% url 'music:album_create' %}{% query_builder request %}">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Album
                 </a>
             </li>
