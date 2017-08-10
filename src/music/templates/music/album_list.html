@@ -16,7 +16,7 @@
                             {{ album }}
                         </a>
                         <span class="badge">{{ album.song_count }}</span>>
-                        <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:album_delete' album.id %}">
+                        <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:album_delete' album.id %}{% query_builder request %}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </li>
