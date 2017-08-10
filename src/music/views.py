@@ -45,6 +45,12 @@ class AlbumCreateView(views.SetHeadlineMixin, SuccessUrlMixin, generic.CreateVie
     form_class = forms.AlbumForm
     headline = 'Add Album'
 
+    def get_initial(self):
+        initial = super(AlbumCreateView, self).get_initial()
+        if self.request.GET.get('tags'):
+            initial['tags'] = self.request.GET.get('tags')
+        return initial
+
 
 class AlbumUpdateView(views.SetHeadlineMixin, SuccessUrlMixin, generic.UpdateView):
     model = Album
