@@ -3,6 +3,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, ButtonHolder, Submit
+from taggit_selectize.widgets import TagSelectize
 
 from music.models import Album
 
@@ -31,6 +32,7 @@ class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
         fields = ('artist', 'album_title', 'genre', 'album_logo', 'tags')
+        widgets = {'tags': TagSelectize(), }
 
     def __init__(self, *args, **kwargs):
         super(AlbumForm, self).__init__(*args, **kwargs)

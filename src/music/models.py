@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
-from taggit.managers import TaggableManager
+from taggit_selectize.managers import TaggableManager
 
 
 class Album(models.Model):

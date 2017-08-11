@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^', RedirectView.as_view(pattern_name='music:album_list'), name='home'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^stocks/', include('companies.urls')),
+    url(r'^taggit/', include('taggit_selectize.urls')),
 ]
 
 if settings.DEBUG:
