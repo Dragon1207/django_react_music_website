@@ -19,3 +19,7 @@ django-allauth==0.32.0
 
 # Debug toolbar
 django-debug-toolbar==1.8
+
+# Testing
+factory-boy==2.9.2
+selenium==3.5.0
