@@ -21,6 +21,7 @@ class AlbumListView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        # TODO: Move to Model Manager
         queryset = super(AlbumListView, self).get_queryset()
         tags = self.request.GET.get('tags')
         if tags:
