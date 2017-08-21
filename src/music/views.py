@@ -1,5 +1,4 @@
 from braces import views
-from django.db.models import Count, Q
 from django.urls import reverse
 from django.views import generic
 
@@ -17,23 +16,10 @@ class SuccessUrlMixin(generic.base.View):
 
 
 class AlbumListView(generic.ListView):
-    model = Album
     paginate_by = 10
 
     def get_queryset(self):
-        # TODO: Move to Model Manager
-        queryset = super(AlbumListView, self).get_queryset()
-        tags = self.request.GET.get('tags')
-        if tags:
-            tags = tags.split(',')
-            queryset = queryset.filter(tags__name__in=tags).distinct()
-        q = self.request.GET.get('q')
-        if q:
-            queryset = queryset.filter(
-                    Q(artist__icontains=q) |
-                    Q(album_title__icontains=q)).distinct()
-        queryset = queryset.annotate(song_count=Count('songs'))
-        return queryset
+        return Album.objects.list(self.request.GET)
 
 
 class AlbumDetailView(generic.DetailView, generic.UpdateView):

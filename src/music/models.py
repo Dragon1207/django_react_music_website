@@ -1,6 +1,23 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Count, Q
 from taggit_selectize.managers import TaggableManager
+
+
+class AlbumQuerySet(models.QuerySet):
+    def list(self, query_dict={}):
+        queryset = self
+        tags = query_dict.get('tags')
+        if tags:
+            tags = tags.split(',')
+            queryset = queryset.filter(tags__name__in=tags).distinct()
+        q = query_dict.get('q')
+        if q:
+            queryset = queryset.filter(
+                    Q(artist__icontains=q) |
+                    Q(album_title__icontains=q)).distinct()
+        queryset = queryset.annotate(song_count=Count('songs'))
+        return queryset
 
 
 class Album(models.Model):
@@ -9,6 +26,8 @@ class Album(models.Model):
     genre = models.CharField(max_length=100)
     album_logo = models.ImageField(null=True, blank=True)
     tags = TaggableManager(blank=True)
+
+    objects = AlbumQuerySet.as_manager()
 
     def set_favorite_song(self, value):
         song = self.songs.get(pk=value)
