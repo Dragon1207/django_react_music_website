@@ -47,7 +47,7 @@ class Album(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title, allow_unicode=True)
+            self.slug = '-'.join((slugify(self.artist, allow_unicode=True), slugify(self.title, allow_unicode=True)))
         super(Album, self).save(*args, **kwargs)
 
 
@@ -67,5 +67,5 @@ class Song(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title, allow_unicode=True)
+            self.slug = '-'.join((slugify(self.album.title, allow_unicode=True), slugify(self.title, allow_unicode=True)))
         super(Song, self).save(*args, **kwargs)

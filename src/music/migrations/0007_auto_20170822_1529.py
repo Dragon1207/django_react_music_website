@@ -25,13 +25,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='album',
             name='slug',
-            field=models.SlugField(default=None, max_length=250, unique=True),
+            field=models.SlugField(default=None, max_length=250, blank=True, null=True),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='song',
             name='slug',
-            field=models.SlugField(default=None, max_length=250, unique=True),
+            field=models.SlugField(default=None, max_length=250, blank=True, null=True),
             preserve_default=False,
         ),
     ]
