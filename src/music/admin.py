@@ -9,7 +9,7 @@ admin.site.register(Album, AlbumAdmin)
 
 
 class SongAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title', 'title',)}
+    prepopulated_fields = {'slug': ('title',)}
     # TODO: Make prepopulated_fields somehow fill `slug` field based on (album.title, title)
 
 admin.site.register(Song, SongAdmin)
