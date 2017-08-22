@@ -3,10 +3,10 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from . import views
+from companies.views import StockList
 
 urlpatterns = [
-    url(r'^$', views.StockList.as_view()),
+    url(r'^$', StockList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

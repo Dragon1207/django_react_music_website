@@ -1,13 +1,13 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-from .models import Stock
-from .serializers import StockSerializer
+from rest_framework.views import APIView
+
+from companies.models import Stock
+from companies.serializers import StockSerializer
 
 
 class StockList(APIView):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         stocks = Stock.objects.all()
         serializer = StockSerializer(stocks, many=True)
         return Response(serializer.data)

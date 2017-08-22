@@ -30,7 +30,7 @@ class AlbumFactory(factory.DjangoModelFactory):
         model = Album
 
     artist = 'MyArtist'
-    album_title = 'MyAlbumTitle'
+    title = 'MyAlbumTitle'
     genre = 'MyGenre'
 
 
@@ -40,7 +40,7 @@ class SongFactory(factory.DjangoModelFactory):
 
     album = factory.SubFactory(AlbumFactory)
     file_type = 'MyFileType'
-    song_title = 'MySongTitle'
+    title = 'MySongTitle'
     is_favorite = 'False'
 
 
@@ -105,7 +105,7 @@ class CreatePostIntegrationTest(LiveServerTestCase):
                 'path': '/'})
         self.selenium.refresh()  # need to update page for logged in user
         self.selenium.find_element_by_id('id_artist').send_keys('MyArtist')
-        self.selenium.find_element_by_id('id_album_title').send_keys('MyAlbumTitle')
+        self.selenium.find_element_by_id('id_title').send_keys('MyAlbumTitle')
         self.selenium.find_element_by_id('id_genre').send_keys('MyGenre')
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-        self.assertEqual(Album.objects.first().album_title, 'MyAlbumTitle')
+        self.assertEqual(Album.objects.first().title, 'MyAlbumTitle')

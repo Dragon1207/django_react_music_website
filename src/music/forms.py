@@ -17,7 +17,7 @@ class AlbumFavoriteForm(forms.Form):
             self.instance = Album()
         else:
             self.instance = instance
-            choices = (item for item in instance.songs.values_list('pk', 'song_title'))
+            choices = (item for item in instance.songs.values_list('pk', 'title'))
             self.fields['favorite_song'] = forms.TypedChoiceField(choices=choices, widget=forms.RadioSelect, coerce=int)
 
     def save(self):
@@ -31,14 +31,14 @@ class AlbumFavoriteForm(forms.Form):
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        fields = ('artist', 'album_title', 'genre', 'album_logo', 'tags')
+        fields = ('artist', "title", 'genre', 'album_logo', 'tags')
         widgets = {'tags': TagSelectize(), }
 
     def __init__(self, *args, **kwargs):
         super(AlbumForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-                'artist', 'album_title', 'genre', 'album_logo', 'tags',
+                'artist', 'title', 'genre', 'album_logo', 'tags',
                 ButtonHolder(
                         Submit('submit', 'Submit', css_class='btn btn-default')
                 )
