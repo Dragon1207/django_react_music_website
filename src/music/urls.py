@@ -11,3 +11,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/update$', views.AlbumUpdateView.as_view(), name='album_update'),
     url(r'^(?P<pk>\d+)/delete$', views.AlbumDeleteView.as_view(), name='album_delete'),
 ]
+
+# TODO: change pk to slug in URLs
