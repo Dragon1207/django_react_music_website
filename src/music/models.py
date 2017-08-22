@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count, Q
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from taggit_selectize.managers import TaggableManager
 
 
@@ -47,7 +47,7 @@ class Album(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title, allow_unicode=True)
         super(Album, self).save(*args, **kwargs)
 
 
@@ -67,5 +67,5 @@ class Song(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title, allow_unicode=True)
         super(Song, self).save(*args, **kwargs)
