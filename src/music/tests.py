@@ -9,7 +9,7 @@ from django.test import TestCase, Client, RequestFactory, LiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
 
 from music.models import Album, Song
-from music.views import AlbumListView
+from music.views import AlbumList
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
@@ -64,14 +64,14 @@ class AlbumListViewTests(TestCase):
     def test_no_albums_in_context(self):
         request = self.factory.get('/')
         request.user = self.user
-        response = AlbumListView.as_view()(request)
+        response = AlbumList.as_view()(request)
         self.assertEquals(list(response.context_data['object_list']), [],)
 
     def test_albums_in_context(self):
         request = self.factory.get('/')
         album = AlbumFactory()
         request.user = self.user
-        response = AlbumListView.as_view()(request)
+        response = AlbumList.as_view()(request)
         self.assertEquals(list(response.context_data['object_list']), [album],)
 
 
@@ -96,7 +96,7 @@ class CreatePostIntegrationTest(LiveServerTestCase):
         cookie = self.client.cookies[settings.SESSION_COOKIE_NAME]
         # Replace `localhost` to 127.0.0.1 due to the WinError 10054 according to the
         # https://stackoverflow.com/a/14491845/1360307
-        self.selenium.get(f'{self.live_server_url}{reverse("music:album_create")}'.replace('localhost', '127.0.0.1'))
+        self.selenium.get(f'{self.live_server_url}{reverse("music:albums:create")}'.replace('localhost', '127.0.0.1'))
         if cookie:
             self.selenium.add_cookie({
                 'name': settings.SESSION_COOKIE_NAME,

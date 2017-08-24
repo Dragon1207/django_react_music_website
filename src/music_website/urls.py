@@ -22,10 +22,10 @@ from django.views.generic import RedirectView
 urlpatterns = [
     url(r'^music/', include('music.urls', namespace='music')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', RedirectView.as_view(pattern_name='music:album_list'), name='home'),
+    url(r'^$', RedirectView.as_view(pattern_name='music:albums:list'), name='home'),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^stocks/', include('companies.urls')),
     url(r'^taggit/', include('taggit_selectize.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.DEBUG:

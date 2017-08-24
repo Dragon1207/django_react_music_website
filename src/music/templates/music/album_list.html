@@ -16,7 +16,7 @@
                             {{ album }}
                         </a>
                         <span class="badge">{{ album.song_count }}</span>>
-                        <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:album_delete' album.id %}{% query_builder request %}">
+                        <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:albums:delete' album.id %}{% query_builder request %}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </li>
@@ -28,14 +28,14 @@
                 <div class="pagination">
                     <span class="page-links">
                         {% if page_obj.has_previous %}
-                            <a href="{% url 'music:album_list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
+                            <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
                         {% endif %}
                         {% for pn in paginator.page_range %}
                             {% if not forloop.first %}
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
                             {% endif %}
                             {% if page_obj.number != pn %}
-                                <a href="{% url 'music:album_list' %}{% query_builder request page=pn %}">
+                                <a href="{% url 'music:albums:list' %}{% query_builder request page=pn %}">
                             {% endif %}
                             {{ pn }}
                             {% if page_obj.number != pn %}
@@ -43,7 +43,7 @@
                             {% endif %}
                         {% endfor %}
                         {% if page_obj.has_next %}
-                            <a href="{% url 'music:album_list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
+                            <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
                         {% endif %}
                     </span>
                 </div>

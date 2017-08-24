@@ -52,7 +52,6 @@ THIRD_PARTY_APPS = (
 )
 LOCAL_APPS = (
     'music',
-    'companies',
 )
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -215,4 +214,11 @@ TAGGIT_STRING_FROM_TAGS = 'taggit_selectize.utils.join_tags'
 # Disable it if you need to work with taggit-selectize in django-admin
 TAGGIT_SELECTIZE = {
     'CSS_FILENAMES': ("taggit_selectize/css/selectize.bootstrap3.css",),
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'PAGE_SIZE': 10
 }

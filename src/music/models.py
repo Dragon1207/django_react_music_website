@@ -43,7 +43,7 @@ class Album(models.Model):
         return f'{self.title} . {self.artist}'
 
     def get_absolute_url(self):
-        return reverse('music:album_detail', kwargs={'slug': self.slug})
+        return reverse('music:albums:detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
