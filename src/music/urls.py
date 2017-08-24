@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.conf.urls import url, include
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from music.views import AlbumList, AlbumCreate, AlbumDetail, AlbumUpdate, AlbumDelete, AlbumListApi, AlbumDetailApi, \
     SongDetailApi
@@ -28,3 +29,5 @@ urlpatterns = [
     url(r'^albums/', include(album_patterns, namespace='albums')),
     url(r'^songs/', include(song_patterns, namespace='songs')),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
