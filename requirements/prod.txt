@@ -1,0 +1,20 @@
+# Everything needed in production
+
+# Django
+Django==1.11.3
+django-braces==1.11.0
+djangorestframework==3.6.3
+
+# Database
+dj-database-url==0.4.2
+psycopg2==2.7.1
+
+# Forms
+django-crispy-forms==1.6.1
+django-taggit==0.22.1
+taggit-selectize==2.3.0
+easy-thumbnails==2.4.1
+Pillow==4.2.1
+
+# Auth
+django-allauth==0.32.0
