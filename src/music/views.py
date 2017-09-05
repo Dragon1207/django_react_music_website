@@ -1,7 +1,7 @@
 from braces.views import SetHeadlineMixin
 from django.urls import reverse
 from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from music import forms

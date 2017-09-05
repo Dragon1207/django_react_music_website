@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from music.views import AlbumList, AlbumCreate, AlbumDetail, AlbumUpdate, AlbumDelete, AlbumListApi, AlbumDetailApi, \
-    SongDetailApi
+from music.views import (AlbumCreate, AlbumDelete, AlbumDetail, AlbumDetailApi, AlbumList, AlbumListApi, AlbumUpdate,
+                         SongDetailApi)
 
 album_api_patterns = [
     url(r'^$', AlbumListApi.as_view(), name='list'),

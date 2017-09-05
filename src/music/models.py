@@ -15,8 +15,8 @@ class AlbumQuerySet(models.QuerySet):
         q = query_dict.get('q')
         if q:
             queryset = queryset.filter(
-                    Q(artist__icontains=q) |
-                    Q(title__icontains=q)).distinct()
+                Q(artist__icontains=q) |
+                Q(title__icontains=q)).distinct()
         queryset = queryset.annotate(song_count=Count('songs'))
         return queryset
 

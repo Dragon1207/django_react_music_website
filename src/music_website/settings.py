@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -52,6 +53,7 @@ THIRD_PARTY_APPS = (
 )
 LOCAL_APPS = (
     'music',
+    'core'
 )
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -108,7 +110,6 @@ DATABASES = {
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-print(DATABASES['default'])
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -212,7 +213,7 @@ TAGGIT_STRING_FROM_TAGS = 'taggit_selectize.utils.join_tags'
 
 # Disable it if you need to work with taggit-selectize in django-admin
 TAGGIT_SELECTIZE = {
-    'CSS_FILENAMES': ("taggit_selectize/css/selectize.bootstrap3.css",),
+    'CSS_FILENAMES': ('taggit_selectize/css/selectize.bootstrap3.css',),
 }
 
 REST_FRAMEWORK = {
