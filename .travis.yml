@@ -1,0 +1,8 @@
+# Config file for automatic testing at travis-ci.org
+sudo: false  # http://docs.travis-ci.com/user/migrating-from-legacy/
+language: python
+python:
+  - 3.6
+install: pip install -r requirements/dev.txt
+before_script: python src/manage.py lint
+script: python src/manage.py test
