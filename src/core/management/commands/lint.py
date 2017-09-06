@@ -16,7 +16,7 @@ class Command(BaseCommand):
                             help='Fix imports using isort, before linting')
 
     def handle(self, *args, **options):
-        skip = ['requirements', 'env']
+        skip = ['requirements', 'env', 'static']
         root_files = glob('*.py')
         root_directories = [name for name in next(os.walk('.'))[1] if not name.startswith('.')]
         files_and_directories = [arg for arg in root_files + root_directories if arg not in skip]
