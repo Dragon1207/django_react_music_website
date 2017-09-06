@@ -29,7 +29,10 @@ class Command(BaseCommand):
             if rv is not 0:
                 exit(rv)
 
-        scripts_path = os.path.join(os.path.dirname(sys.executable), 'Scripts')
+        scripts_path = os.path.dirname(sys.executable)
+        if os.name == 'nt':
+            scripts_path = os.path.join(scripts_path, 'Scripts')
+
         if options['fix_imports']:
             execute_tool('Fixing import order', os.path.join(scripts_path, 'isort'), '-rc')
         execute_tool('Checking code style', os.path.join(scripts_path, 'flake8'))
