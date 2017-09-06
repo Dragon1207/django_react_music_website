@@ -6,10 +6,10 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import Client, LiveServerTestCase, RequestFactory, TestCase
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 from music.models import Album, Song
 from music.views import AlbumList
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
