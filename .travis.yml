@@ -6,15 +6,11 @@ python:
 env:
   global:
     - NODE_ENV=development
+before_install: npm install
 install:
   - pip install -r requirements/dev.txt
-  - npm install
-  - ls /home/travis/build/osya/music_website/static/static
-  - ls /home/travis/build/osya/music_website/static/dist
-before_script:
   - node node_modules/webpack/bin/webpack.js
-  - cd src
-  - python manage.py collectstatic
+after_install: python manage.py collectstatic
 script:
   - python manage.py lint
   - python manage.py test
