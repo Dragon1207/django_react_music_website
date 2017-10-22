@@ -3,6 +3,10 @@ sudo: false  # http://docs.travis-ci.com/user/migrating-from-legacy/
 language: python
 python:
   - 3.6
-install: pip install -r requirements/dev.txt
-before_script: python src/manage.py lint
-script: python src/manage.py test
+install:
+  - pip install -r requirements/dev.txt
+  - npm install
+before_script: node node_modules/webpack/bin/webpack.js
+script:
+  - python src/manage.py lint
+  - python src/manage.py test
