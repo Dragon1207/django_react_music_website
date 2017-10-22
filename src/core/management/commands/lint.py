@@ -21,9 +21,9 @@ class Command(BaseCommand):
         root_directories = [name for name in next(os.walk('.'))[1] if not name.startswith('.')]
         files_and_directories = [arg for arg in root_files + root_directories if arg not in skip]
 
-        def execute_tool(description, *args):
+        def execute_tool(description, *args2):
             """Execute a checking tool with its arguments."""
-            command_line = list(args) + files_and_directories
+            command_line = list(args2) + files_and_directories
             print('{}: {}'.format(description, ' '.join(command_line)))
             rv = call(command_line)
             if rv is not 0:

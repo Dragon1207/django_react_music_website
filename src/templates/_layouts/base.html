@@ -1,17 +1,15 @@
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} :: Music Website</title>
 
-    {% load static %}
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+{#    jQuery neded before Selectize #}
+    {%  render_bundle "main" %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
-
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>{% include '_layouts/navbar.html' %}</header>
@@ -29,16 +27,9 @@
         </div>
         {% endif %}
 
-        {#        jQuery is required by taggit-selectize                    #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         {% block content %}{% endblock %}
 
         {% block styles %}{% endblock %}
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
     </div>
 </body>
 </html>
