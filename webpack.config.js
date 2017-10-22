@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const BundleTracker = require('webpack-bundle-tracker');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const rootAssetPath = path.join(__dirname, "static");
+console.log(`rootAssetPath=${rootAssetPath}`);
 
 (function (extractCss, webpack2) {
     module.exports = (env) => {
