@@ -8,7 +8,8 @@ install:
   - npm install
 before_script:
   - node node_modules/webpack/bin/webpack.js
+  - cd src
   - python manage.py collectstatic
 script:
-  - python src/manage.py lint
-  - python src/manage.py test
+  - python manage.py lint
+  - python manage.py test
