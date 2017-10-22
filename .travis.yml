@@ -11,6 +11,7 @@ install:
   - pip install -r requirements/dev.txt
   - node node_modules/webpack/bin/webpack.js
 before_script:
+  - ls home/travis/build/osya/music_website/static/dist
   - cd src
   - python manage.py collectstatic
 script:
