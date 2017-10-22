@@ -10,7 +10,9 @@ before_install: npm install
 install:
   - pip install -r requirements/dev.txt
   - node node_modules/webpack/bin/webpack.js
-after_install: python manage.py collectstatic
+after_install:
+  - cd src
+  - python manage.py collectstatic
 script:
   - python manage.py lint
   - python manage.py test
