@@ -1,7 +1,7 @@
 "use strict";
 const path = require("path");
 const webpack = require("webpack");
-const BundleTracker = require('webpack-bundle-tracker');
+const BundleTracker = require("webpack-bundle-tracker");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const rootAssetPath = path.join(__dirname, "static");
 

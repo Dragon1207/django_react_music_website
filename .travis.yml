@@ -3,15 +3,12 @@ sudo: false  # http://docs.travis-ci.com/user/migrating-from-legacy/
 language: python
 python:
   - 3.6
-env:
-  global:
-    - NODE_ENV=development
 before_install: npm install
 install:
   - pip install -r requirements/dev.txt
   - node node_modules/webpack/bin/webpack.js
 before_script:
-  - sleep 1
+  - sleep 2
   - ls /home/travis/build/osya/music_website/static/dist
   - cat /home/travis/build/osya/music_website/static/dist/manifest.json
   - cd src
