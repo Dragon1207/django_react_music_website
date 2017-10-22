@@ -3,9 +3,11 @@ sudo: false  # http://docs.travis-ci.com/user/migrating-from-legacy/
 language: python
 python:
   - 3.6
+env:
+  global:
+    - NODE_ENV=development
 install:
   - pip install -r requirements/dev.txt
-  - npm install
 before_script:
   - node node_modules/webpack/bin/webpack.js
   - cd src
