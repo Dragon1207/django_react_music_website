@@ -46,7 +46,8 @@ const rootAssetPath = path.join(__dirname, "static");
                 extractCss,
                 // new BundleTracker({filename: path.join(rootAssetPath, "dist", "manifest.json")})
                 new BundleTracker({filename: "/home/travis/build/osya/music_website/static/dist/manifest.json"})
-            ].concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
+            ]
+                // .concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
         };
     };
 }(new ExtractTextPlugin("[name].[chunkhash].css"), webpack));
