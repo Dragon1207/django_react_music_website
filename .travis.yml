@@ -8,6 +8,7 @@ env:
     - NODE_ENV=development
 install:
   - pip install -r requirements/dev.txt
+  - npm install
 before_script:
   - node node_modules/webpack/bin/webpack.js
   - cd src
