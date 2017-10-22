@@ -162,7 +162,7 @@ WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
         'BUNDLE_DIR_NAME': 'dist/',  # must end with slash
-        'STATS_FILE': os.path.join(STATIC_ROOT, 'manifest.json'),
+        'STATS_FILE': os.path.join(os.path.dirname(BASE_DIR), 'static', 'dist', 'manifest.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None
     }
