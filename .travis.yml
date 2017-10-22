@@ -6,7 +6,9 @@ python:
 install:
   - pip install -r requirements/dev.txt
   - npm install
-before_script: node node_modules/webpack/bin/webpack.js
+before_script:
+  - node node_modules/webpack/bin/webpack.js
+  - python manage.py collectstatic
 script:
   - python src/manage.py lint
   - python src/manage.py test
