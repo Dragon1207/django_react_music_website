@@ -52,5 +52,5 @@ const rootAssetPath = path.join(__dirname, "static");
 
 console.log(`rootAssetPath=${rootAssetPath}`);
 var fs = require("fs");
-var files = fs.readdirSync(path.join(rootAssetPath, "dist"));
-console.log(`files:${files}`);
+console.log(`filesDist:${fs.readdirSync(path.join(rootAssetPath, "dist"))}`);
+console.log(`filesStatic:${fs.readdirSync(path.join(rootAssetPath, "static"))}`);
