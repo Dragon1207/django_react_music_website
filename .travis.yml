@@ -9,6 +9,8 @@ env:
 install:
   - pip install -r requirements/dev.txt
   - npm install
+  - ls /home/travis/build/osya/music_website/static/static
+  - ls /home/travis/build/osya/music_website/static/dist
 before_script:
   - node node_modules/webpack/bin/webpack.js
   - cd src

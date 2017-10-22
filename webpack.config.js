@@ -49,8 +49,3 @@ const rootAssetPath = path.join(__dirname, "static");
         };
     };
 }(new ExtractTextPlugin("[name].[chunkhash].css"), webpack));
-
-console.log(`rootAssetPath=${rootAssetPath}`);
-var fs = require("fs");
-console.log(`filesDist:${fs.readdirSync(path.join(rootAssetPath, "dist"))}`);
-console.log(`filesStatic:${fs.readdirSync(path.join(rootAssetPath, "static"))}`);
