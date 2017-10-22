@@ -4,7 +4,6 @@ const webpack = require("webpack");
 const BundleTracker = require('webpack-bundle-tracker');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const rootAssetPath = path.join(__dirname, "static");
-console.log(`rootAssetPath=${rootAssetPath}`);
 
 (function (extractCss, webpack2) {
     module.exports = (env) => {
@@ -50,3 +49,8 @@ console.log(`rootAssetPath=${rootAssetPath}`);
         };
     };
 }(new ExtractTextPlugin("[name].[chunkhash].css"), webpack));
+
+console.log(`rootAssetPath=${rootAssetPath}`);
+var fs = require("fs");
+var files = fs.readdirSync(path.join(rootAssetPath, "dist"));
+console.log(`files:${files}`);
