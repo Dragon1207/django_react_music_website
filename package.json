@@ -25,6 +25,7 @@
   },
   "dependencies": {},
   "scripts": {
-    "heroku-postbuild": "webpack --config ./webpack.config.js --progress"
+    "webpack:deploy": "webpack --config ./webpack.config.js --progress",
+    "heroku-postbuild": "npm run webpack:deploy"
   }
 }
