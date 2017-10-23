@@ -44,8 +44,8 @@ const rootAssetPath = path.join(__dirname, "static");
             stats: {modules: false},
             plugins: [
                 extractCss,
-                // new BundleTracker({filename: path.join(rootAssetPath, "dist", "manifest.json")})
-                new BundleTracker({filename: "/home/travis/build/osya/music_website/static/dist/manifest.json"})
+                new BundleTracker({filename: path.join(rootAssetPath, "dist", "manifest.json")})
+                // new BundleTracker({filename: "/home/travis/build/osya/music_website/static/dist/manifest.json"})
             ]
                 // .concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
         };

@@ -8,6 +8,7 @@ install:
   - pip install -r requirements/dev.txt
   - node node_modules/webpack/bin/webpack.js
 before_script:
+  - find / -name manifest.json
   - ls /home/travis/build/osya/music_website/static/dist
   - cat /home/travis/build/osya/music_website/static/dist/manifest.json
   - cd src
