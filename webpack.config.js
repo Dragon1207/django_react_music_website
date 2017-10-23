@@ -51,3 +51,5 @@ const rootAssetPath = path.join(__dirname, "static");
         };
     };
 }(new ExtractTextPlugin("[name].[chunkhash].css"), webpack));
+
+console.log(`Relative path: ${path.relative(path.join(rootAssetPath, "dist", "manifest.json"), __dirname)}`);
