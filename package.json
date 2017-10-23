@@ -6,24 +6,25 @@
       "es6": true
     }
   },
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^7.1.5",
-    "babel-eslint": "^8.0.1",
     "bootstrap": "^3.3.7",
     "css-loader": "^0.28.7",
-    "eslint": "^4.9.0",
-    "eslint-plugin-react": "^7.4.0",
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^3.0.1",
-    "file-loader": "^1.1.5",
     "jquery": "^3.2.1",
-    "phantomjs-prebuilt": "^2.1.15",
     "postcss-loader": "^2.0.8",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
     "webpack-bundle-tracker": "^0.2.0"
   },
-  "dependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "file-loader": "^1.1.5",
+    "phantomjs-prebuilt": "^2.1.15"
+  },
   "scripts": {
     "webpack:deploy": "webpack --config ./webpack.config.js --progress",
     "heroku-postbuild": "npm run webpack:deploy"
