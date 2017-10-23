@@ -1,8 +1,8 @@
+import os
 import random
 import string
 
 import factory
-import os
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
