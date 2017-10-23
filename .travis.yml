@@ -5,7 +5,7 @@ python:
   - 3.6
 before_install: npm install
 install:
-  - pip install -r requirements/dev.txt
+#  - pip install -r requirements/dev.txt
   - node node_modules/webpack/bin/webpack.js
 before_script:
   - find / -name manifest.json
