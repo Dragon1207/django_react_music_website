@@ -45,8 +45,7 @@ const rootAssetPath = path.join(__dirname, "static");
             plugins: [
                 extractCss,
                 new BundleTracker({filename: path.join("static", "dist", "manifest.json")})
-            ]
-                // .concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
+            ].concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
         };
     };
 }(new ExtractTextPlugin("[name].[chunkhash].css"), webpack));

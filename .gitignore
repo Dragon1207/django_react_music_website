@@ -66,3 +66,4 @@ fabric.properties
 /static/dist/main.*
 /static/dist/selectize.*
 /static/dist/*.svg
+/src/ghostdriver.log

@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import Client, LiveServerTestCase, RequestFactory, TestCase
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.phantomjs.webdriver import WebDriver
 
 from music.models import Album, Song
 from music.views import AlbumList
@@ -102,7 +102,10 @@ class CreatePostIntegrationTest(LiveServerTestCase):
                 'name': settings.SESSION_COOKIE_NAME,
                 'value': cookie.value,
                 'secure': False,
-                'path': '/'})
+                'path': '/',
+                'domain': '127.0.0.1'   # it is needed for PhantomJS due to the issue
+                # "selenium.common.exceptions.WebDriverException: Message: 'phantomjs' executable needs to be in PATH"
+            })
         self.selenium.refresh()  # need to update page for logged in user
         self.selenium.find_element_by_id('id_artist').send_keys('MyArtist')
         self.selenium.find_element_by_id('id_title').send_keys('MyAlbumTitle')
