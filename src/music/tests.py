@@ -2,6 +2,7 @@ import random
 import string
 
 import factory
+import os
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -80,7 +81,10 @@ class CreatePostIntegrationTest(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.selenium = WebDriver()
+        cls.selenium = WebDriver(
+            executable_path=os.path.join(os.path.dirname(settings.BASE_DIR), 'node_modules', 'phantomjs-prebuilt',
+                                         'lib', 'phantom', 'bin', 'phantomjs')
+        )
         cls.password = random_string_generator()
         cls.user = UserFactory(password=cls.password)
         cls.client = Client()
