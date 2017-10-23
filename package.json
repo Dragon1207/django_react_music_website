@@ -23,5 +23,8 @@
     "webpack": "^3.8.1",
     "webpack-bundle-tracker": "^0.2.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "heroku-postbuild": "webpack --config ./webpack.config.js --progress"
+  }
 }
