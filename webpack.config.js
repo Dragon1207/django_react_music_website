@@ -14,13 +14,13 @@ const rootAssetPath = path.join(__dirname, "static");
                     "jquery", // jQuery is required by taggit-selectize
                     "bootstrap",
                     "bootstrap/dist/css/bootstrap.css",
-                    path.join(rootAssetPath, "static", "css", "main.css"),
-                    path.join(rootAssetPath, "static", "img", "background.png")
+                    path.join(rootAssetPath, "css", "main.css"),
+                    path.join(rootAssetPath, "img", "background.png")
                 ],
-                "selectize": [path.join(rootAssetPath, "static", "taggit_selectize", "css", "selectize.bootstrap3.css")]
+                "selectize": [path.join(rootAssetPath, "css", "taggit_selectize", "css", "selectize.bootstrap3.css")]
             },
             output: {
-                path: path.join(rootAssetPath, "dist"),
+                path: path.join(rootAssetPath, "static"),
                 publicPath: "/static/",
                 filename: "[name].[hash].js",
                 library: "[name]_[hash]"
@@ -44,7 +44,7 @@ const rootAssetPath = path.join(__dirname, "static");
             stats: {modules: false},
             plugins: [
                 extractCss,
-                new BundleTracker({filename: path.join("static", "dist", "manifest.json")})
+                new BundleTracker({filename: path.join("static", "manifest.json")})
             ].concat(isDevBuild ? [] : [new webpack2.optimize.UglifyJsPlugin()])
         };
     };
