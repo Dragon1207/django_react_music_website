@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/osya/music_website.svg)](https://travis-ci.org/osya/music_website)
+[![Build Status](https://travis-ci.org/osya/music_website.svg)](https://travis-ci.org/osya/music_website) [![Coverage Status](https://coveralls.io/repos/github/osya/music_website/badge.svg?branch=master)](https://coveralls.io/github/osya/music_website?branch=master)
 
 Django-based Music website created during the video serie [Django Tutorials for Beginners](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK)
  
