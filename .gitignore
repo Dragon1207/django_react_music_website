@@ -65,5 +65,4 @@ fabric.properties
 /src/ghostdriver.log
 /static/manifest.json
 /static/static/
-/.coverage
-/src/.coverage
+/**/.coverage
