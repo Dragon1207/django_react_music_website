@@ -15,15 +15,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/media" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.6.3 (E:\Anaconda3\envs\Django\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../website/src/templates" />
-        <option value="$MODULE_DIR$/../website/src/music/templates" />
+        <option value="$MODULE_DIR$/src/templates" />
       </list>
     </option>
   </component>
