@@ -66,3 +66,4 @@ fabric.properties
 /static/manifest.json
 /static/static/
 /**/.coverage
+/.env
