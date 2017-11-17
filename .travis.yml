@@ -4,7 +4,7 @@ language: python
 python:
   - 3.6
 env:
-  - SECRET_KEY='dumb_secret_key_for_travis'
+  - SECRET_KEY=dumb_secret_key_for_travis
 before_install: npm install
 install:
   - pip install -r requirements/dev.txt

@@ -19,4 +19,5 @@ Pillow==4.2.1
 
 # Auth
 django-allauth==0.34.0
+
 python-decouple~=3.1
