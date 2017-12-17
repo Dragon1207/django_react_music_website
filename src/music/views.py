@@ -62,13 +62,13 @@ class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, CreateV
         return initial
 
 
-class AlbumUpdate(SetHeadlineMixin, SuccessUrlMixin, UpdateView):
+class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, UpdateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Update Album'
 
 
-class AlbumDelete(SuccessUrlMixin, DeleteView):
+class AlbumDelete(LoginRequiredMixin, SuccessUrlMixin, DeleteView):
     model = Album
 
 
