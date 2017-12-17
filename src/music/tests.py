@@ -84,7 +84,7 @@ class CreatePostIntegrationTest(LiveServerTestCase):
         cls.selenium = WebDriver(
             executable_path=os.path.join(os.path.dirname(settings.BASE_DIR), 'node_modules', 'phantomjs-prebuilt',
                                          'lib', 'phantom', 'bin', 'phantomjs')
-        )
+        ) if 'nt' == os.name else WebDriver()
         cls.password = random_string_generator()
         cls.user = UserFactory(password=cls.password)
         cls.client = Client()
