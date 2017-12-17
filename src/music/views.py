@@ -1,4 +1,5 @@
 from braces.views import SetHeadlineMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -49,7 +50,7 @@ class AlbumDetailApi(RetrieveUpdateDestroyAPIView):
         return Album.objects.list(self.request.GET)
 
 
-class AlbumCreate(SetHeadlineMixin, SuccessUrlMixin, CreateView):
+class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, CreateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Add Album'
