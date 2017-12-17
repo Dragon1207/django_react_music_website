@@ -1,22 +1,12 @@
 from braces.views import SetHeadlineMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from music import forms
 from music.models import Album, Song
 from music.serializers import AlbumSerializer, SongSerializer
-
-
-class SuccessUrlMixin(View):
-    def get_success_url(self):
-        url = reverse('music:albums:list')
-        query = self.request.GET.urlencode()
-        if query:
-            url = f'{url}?{query}'
-        return url
 
 
 class AlbumList(ListView):
@@ -50,7 +40,7 @@ class AlbumDetailApi(RetrieveUpdateDestroyAPIView):
         return Album.objects.list(self.request.GET)
 
 
-class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, CreateView):
+class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, CreateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Add Album'
@@ -62,14 +52,21 @@ class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, CreateV
         return initial
 
 
-class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, SuccessUrlMixin, UpdateView):
+class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, UpdateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Update Album'
 
 
-class AlbumDelete(LoginRequiredMixin, SuccessUrlMixin, DeleteView):
+class AlbumDelete(LoginRequiredMixin, DeleteView):
     model = Album
+
+    def get_success_url(self):
+        url = reverse('music:albums:list')
+        query = self.request.GET.urlencode()
+        if query:
+            url = f'{url}?{query}'
+        return url
 
 
 class SongDetailApi(RetrieveUpdateDestroyAPIView):
