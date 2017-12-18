@@ -114,5 +114,5 @@ class CreatePostIntegrationTest(LiveServerTestCase):
         self.selenium.find_element_by_id('id_artist').send_keys('MyArtist')
         self.selenium.find_element_by_id('id_title').send_keys('MyAlbumTitle')
         self.selenium.find_element_by_id('id_genre').send_keys('MyGenre')
-        self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
+        self.selenium.find_element_by_xpath('//*[@id="submit-id-submit"]').click()
         self.assertEqual(Album.objects.first().title, 'MyAlbumTitle')

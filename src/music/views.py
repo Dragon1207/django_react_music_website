@@ -2,14 +2,23 @@ from braces.views import SetHeadlineMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic.base import ContextMixin, View
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from music import forms
+from music.forms import SearchForm
 from music.models import Album, Song
 from music.serializers import AlbumSerializer, SongSerializer
 
 
-class AlbumList(ListView):
+class SearchFormMixin(ContextMixin, View):
+    def get_context_data(self, **kwargs):
+        context = super(SearchFormMixin, self).get_context_data(**kwargs)
+        context['search_form'] = SearchForm(self.request.GET)
+        return context
+
+
+class AlbumList(SearchFormMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
@@ -23,7 +32,7 @@ class AlbumListApi(ListCreateAPIView):
         return Album.objects.list(self.request.GET)
 
 
-class AlbumDetail(DetailView, UpdateView):
+class AlbumDetail(SearchFormMixin, DetailView, UpdateView):
     model = Album
     http_method_names = ['get', 'post']
     form_class = forms.AlbumFavoriteForm
@@ -40,7 +49,7 @@ class AlbumDetailApi(RetrieveUpdateDestroyAPIView):
         return Album.objects.list(self.request.GET)
 
 
-class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, CreateView):
+class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Add Album'
@@ -52,13 +61,13 @@ class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         return initial
 
 
-class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, UpdateView):
+class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, UpdateView):
     model = Album
     form_class = forms.AlbumForm
     headline = 'Update Album'
 
 
-class AlbumDelete(LoginRequiredMixin, DeleteView):
+class AlbumDelete(LoginRequiredMixin, SearchFormMixin, DeleteView):
     model = Album
 
     def get_success_url(self):
