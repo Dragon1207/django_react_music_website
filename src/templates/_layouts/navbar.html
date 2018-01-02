@@ -35,8 +35,10 @@
                 </li>
             {% endif %}
             <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-              <ul class="dropdown-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {% if user.is_authenticated %}Hello, {{ user.username }}{% else %}Account{% endif %} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
                   {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'account_logout' %}">
@@ -51,7 +53,7 @@
                     </li>
                     <li><a href="{% url 'account_signup' %}">Signup</a></li>
                   {% endif %}
-              </ul>
+                </ul>
             </li>
         </ul>
     </div><!--/.nav-collapse -->
