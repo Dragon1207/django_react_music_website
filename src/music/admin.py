@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from music.models import Album, Song
+from music.models import Album, Track
 
 
 class AlbumAdmin(admin.ModelAdmin):
@@ -10,9 +10,9 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 
 
-class SongAdmin(admin.ModelAdmin):
+class TrackAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     # TODO: Make prepopulated_fields somehow fill `slug` field based on (album.title, title)
 
 
-admin.site.register(Song, SongAdmin)
+admin.site.register(Track, TrackAdmin)

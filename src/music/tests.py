@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.test import Client, LiveServerTestCase, RequestFactory, TestCase
 from selenium.webdriver.phantomjs.webdriver import WebDriver
 
-from music.models import Album, Song
+from music.models import Album, Track
 from music.views import AlbumList
 
 
@@ -35,13 +35,13 @@ class AlbumFactory(factory.DjangoModelFactory):
     genre = 'MyGenre'
 
 
-class SongFactory(factory.DjangoModelFactory):
+class TrackFactory(factory.DjangoModelFactory):
     class Meta:
-        model = Song
+        model = Track
 
     album = factory.SubFactory(AlbumFactory)
     file_type = 'MyFileType'
-    title = 'MySongTitle'
+    title = 'MyTrackTitle'
     is_favorite = 'False'
 
 
@@ -51,10 +51,10 @@ class AlbumTests(TestCase):
         self.assertEqual(str(album), 'MyAlbumTitle . MyArtist')
 
 
-class SongTests(TestCase):
+class TrackTests(TestCase):
     def test_str(self):
-        s = SongFactory()
-        self.assertEqual(str(s), 'MySongTitle')
+        s = TrackFactory()
+        self.assertEqual(str(s), 'MyTrackTitle')
 
 
 class AlbumListViewTests(TestCase):

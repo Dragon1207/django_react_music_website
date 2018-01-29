@@ -39,15 +39,16 @@ class AlbumFavoriteForm(forms.Form):
             self.instance = Album()
         else:
             self.instance = instance
-            choices = (item for item in instance.songs.values_list('pk', 'title'))
-            self.fields['favorite_song'] = forms.TypedChoiceField(choices=choices, widget=forms.RadioSelect, coerce=int)
+            choices = (item for item in instance.tracks.values_list('pk', 'title'))
+            self.fields['favorite_track'] = \
+                forms.TypedChoiceField(choices=choices, widget=forms.RadioSelect, coerce=int)
 
     def save(self):
         if self.errors:
             raise ValueError(
                 "The AlbumFavoriteForm could not be saved because the data didn't validate."
             )
-        self.instance.set_favorite_song(self.cleaned_data['favorite_song'])
+        self.instance.set_favorite_track(self.cleaned_data['favorite_track'])
 
 
 class AlbumForm(forms.ModelForm):

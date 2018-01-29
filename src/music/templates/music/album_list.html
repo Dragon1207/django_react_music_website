@@ -15,7 +15,7 @@
                             <img src="{% thumbnail album.album_logo 50x50 %}"/>
                             {{ album }}
                         </a>
-                        <span class="badge">{{ album.song_count }}</span>>
+                        <span class="badge">{{ album.track_count }}</span>>
                         {% if user.is_authenticated %}
                             <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:albums:update' slug=album.slug %}{% query_builder request %}">
                                 <span class="glyphicon glyphicon-edit"></span>

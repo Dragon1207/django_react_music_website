@@ -7,8 +7,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 
 from music import forms
 from music.forms import SearchForm
-from music.models import Album, Song
-from music.serializers import AlbumSerializer, SongSerializer
+from music.models import Album, Track
+from music.serializers import AlbumSerializer, TrackSerializer
 
 
 class SearchFormMixin(ContextMixin, View):
@@ -78,10 +78,10 @@ class AlbumDelete(LoginRequiredMixin, SearchFormMixin, DeleteView):
         return url
 
 
-class SongDetailApi(RetrieveUpdateDestroyAPIView):
-    serializer_class = SongSerializer
+class TrackDetailApi(RetrieveUpdateDestroyAPIView):
+    serializer_class = TrackSerializer
 
     def get_queryset(self):
-        return Song.objects.all()
+        return Track.objects.all()
 
 # TODO: Write tests for the API calls

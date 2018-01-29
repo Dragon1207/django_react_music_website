@@ -4,7 +4,7 @@ from django.conf.urls import include, url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from music.views import (AlbumCreate, AlbumDelete, AlbumDetail, AlbumDetailApi, AlbumList, AlbumListApi, AlbumUpdate,
-                         SongDetailApi)
+                         TrackDetailApi)
 
 album_api_patterns = [
     url(r'^$', AlbumListApi.as_view(), name='list'),
@@ -20,14 +20,14 @@ album_patterns = [
     url(r'^(?P<slug>[-\w]+)/delete/$', AlbumDelete.as_view(), name='delete'),
 ]
 
-song_patterns = [
-    url(r'^api/(?P<pk>\d+)/$', SongDetailApi.as_view(), name='detail'),
+track_patterns = [
+    url(r'^api/(?P<pk>\d+)/$', TrackDetailApi.as_view(), name='detail'),
 ]
 
 urlpatterns = [
     url(r'^$', AlbumList.as_view(), name='album_list'),
     url(r'^albums/', include(album_patterns, namespace='albums')),
-    url(r'^songs/', include(song_patterns, namespace='songs')),
+    url(r'^tracks/', include(track_patterns, namespace='tracks')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

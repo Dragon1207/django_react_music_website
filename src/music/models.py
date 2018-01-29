@@ -19,7 +19,7 @@ class AlbumQuerySet(models.QuerySet):
             queryset = queryset.filter(
                 Q(artist__icontains=query) |
                 Q(title__icontains=query)).distinct()
-        queryset = queryset.annotate(song_count=Count('songs'))
+        queryset = queryset.annotate(track_count=Count('tracks'))
         return queryset
 
 
@@ -36,10 +36,10 @@ class Album(models.Model):
 
     objects = AlbumQuerySet.as_manager()
 
-    def set_favorite_song(self, value):
-        song = self.songs.get(pk=value)
-        song.is_favorite = not song.is_favorite
-        song.save()
+    def set_favorite_track(self, value):
+        track = self.tracks.get(pk=value)
+        track.is_favorite = not track.is_favorite
+        track.save()
 
     def __str__(self):
         return f'{self.title} . {self.artist}'
@@ -53,11 +53,11 @@ class Album(models.Model):
         super(Album, self).save(*args, **kwargs)
 
 
-class Song(models.Model):
+class Track(models.Model):
     class Meta:
         ordering = ('album', 'title')
 
-    album = models.ForeignKey(Album, related_name='songs', on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.CASCADE)
     file_type = models.CharField(max_length=10)
     title = models.CharField(max_length=250)
     is_favorite = models.BooleanField(default=False)
@@ -72,4 +72,4 @@ class Song(models.Model):
             self.slug = '-'.join((
                 slugify(self.album.title, allow_unicode=True),
                 slugify(self.title, allow_unicode=True)))
-        super(Song, self).save(*args, **kwargs)
+        super(Track, self).save(*args, **kwargs)

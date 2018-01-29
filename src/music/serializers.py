@@ -2,18 +2,18 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
 
-from music.models import Album, Song
+from music.models import Album, Track
 
 
-class SongSerializer(serializers.ModelSerializer):
+class TrackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Song
+        model = Track
         fields = ('id', 'title',)
 
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ('id', 'title', 'songs',)
+        fields = ('id', 'title', 'tracks',)
 
-    songs = SongSerializer(many=True)
+    tracks = TrackSerializer(many=True)
