@@ -78,6 +78,13 @@ class AlbumDelete(LoginRequiredMixin, SearchFormMixin, DeleteView):
         return url
 
 
+class TrackListApi(ListCreateAPIView):
+    serializer_class = TrackSerializer
+
+    def get_queryset(self):
+        return Track.objects.all()
+
+
 class TrackDetailApi(RetrieveUpdateDestroyAPIView):
     serializer_class = TrackSerializer
 

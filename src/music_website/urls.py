@@ -19,9 +19,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+from music.urls import api_patterns
+
 urlpatterns = [
     url(r'^music/', include('music.urls', namespace='music')),
     url(r'^admin/', admin.site.urls),
+    url(r'^api/', include(api_patterns, namespace='api')),
     url(r'^$', RedirectView.as_view(pattern_name='music:albums:list'), name='home'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^taggit/', include('taggit_selectize.urls')),
