@@ -32,7 +32,7 @@ class SearchForm(forms.Form):
 
 class AlbumFavoriteForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        instance = kwargs.pop('instance')
+        instance = kwargs.pop('instance', None)
         super(AlbumFavoriteForm, self).__init__(*args, **kwargs)
         if instance is None:
             # if we didn't get an instance, instantiate a new one

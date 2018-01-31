@@ -39,14 +39,14 @@ class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackUpdateSerializer(many=True)
 
     def create(self, validated_data):
-        tracks_data = validated_data.pop('tracks')
+        tracks_data = validated_data.pop('tracks', None)
         album = Album.objects.create(**validated_data)
         for track_data in tracks_data:
             Track.objects.create(album=album, **track_data)
         return album
 
     def update(self, instance, validated_data):
-        tracks_data = validated_data.pop('tracks')
+        tracks_data = validated_data.pop('tracks', None)
         super(self.__class__, self).update(instance, validated_data)
         if tracks_data:
             track_to_delete = instance.tracks.exclude(pk__in=[item.get('id', None) for item in tracks_data])
