@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.views.generic.base import ContextMixin, View
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import viewsets
 
 from music import forms
 from music.forms import SearchForm
@@ -25,13 +25,6 @@ class AlbumList(SearchFormMixin, ListView):
         return Album.objects.list(self.request.GET)
 
 
-class AlbumListApi(ListCreateAPIView):
-    serializer_class = AlbumSerializer
-
-    def get_queryset(self):
-        return Album.objects.list(self.request.GET)
-
-
 class AlbumDetail(SearchFormMixin, DetailView, UpdateView):
     model = Album
     http_method_names = ['get', 'post']
@@ -40,13 +33,6 @@ class AlbumDetail(SearchFormMixin, DetailView, UpdateView):
 
     def get_success_url(self):
         return reverse('music:albums:detail', kwargs=self.kwargs)
-
-
-class AlbumDetailApi(RetrieveUpdateDestroyAPIView):
-    serializer_class = AlbumSerializer
-
-    def get_queryset(self):
-        return Album.objects.list(self.request.GET)
 
 
 class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateView):
@@ -78,14 +64,14 @@ class AlbumDelete(LoginRequiredMixin, SearchFormMixin, DeleteView):
         return url
 
 
-class TrackListApi(ListCreateAPIView):
-    serializer_class = TrackSerializer
+class AlbumViewSet(viewsets.ModelViewSet):
+    serializer_class = AlbumSerializer
 
     def get_queryset(self):
-        return Track.objects.all()
+        return Album.objects.list(self.request.GET)
 
 
-class TrackDetailApi(RetrieveUpdateDestroyAPIView):
+class TrackViewSet(viewsets.ModelViewSet):
     serializer_class = TrackSerializer
 
     def get_queryset(self):

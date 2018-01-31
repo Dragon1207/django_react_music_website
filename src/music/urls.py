@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.conf.urls import include, url
+from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from music.views import (AlbumCreate, AlbumDelete, AlbumDetail, AlbumDetailApi, AlbumList, AlbumListApi, AlbumUpdate,
-                         TrackDetailApi, TrackListApi)
+from music.views import AlbumCreate, AlbumDelete, AlbumDetail, AlbumList, AlbumUpdate, AlbumViewSet, TrackViewSet
 
-api_patterns = [
-    url(r'^album/$', AlbumListApi.as_view()),
-    url(r'^album/(?P<pk>\d+)/$', AlbumDetailApi.as_view()),
-    url(r'^track/$', TrackListApi.as_view()),
-    url(r'^track/(?P<pk>\d+)/$', TrackDetailApi.as_view()),
-]
+router = DefaultRouter()
+router.register(r'albums', AlbumViewSet, base_name='album')
+router.register(r'tracks', TrackViewSet, base_name='track')
 
 album_patterns = [
     url(r'^$', AlbumList.as_view(), name='list'),
@@ -27,8 +24,8 @@ track_patterns = [
 
 urlpatterns = [
     url(r'^$', AlbumList.as_view(), name='album_list'),
-    url(r'^album/', include(album_patterns, namespace='albums')),
-    url(r'^track/', include(track_patterns, namespace='tracks')),
+    url(r'^albums/', include(album_patterns, namespace='albums')),
+    url(r'^tracks/', include(track_patterns, namespace='tracks')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
