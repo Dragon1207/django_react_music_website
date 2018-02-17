@@ -21,7 +21,8 @@
                         "bootstrap",
                         "bootstrap/dist/css/bootstrap.css"
                     ],
-                    selectize: path.join(rootAssetPath, "css", "taggit_selectize", "css", "selectize.bootstrap3.css")
+                    selectize: path.join(rootAssetPath, "css", "taggit_selectize", "css", "selectize.bootstrap3.css"),
+                    react: "react"
                 },
                 output: {
                     path: path.join(rootAssetPath, "static"),
