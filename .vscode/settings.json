@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "E:\\Anaconda3\\envs\\Django\\python.exe"
+    "python.pythonPath": "E:\\Anaconda3\\envs\\Django\\python.exe",
+    "python.formatting.provider": "yapf"
 }
