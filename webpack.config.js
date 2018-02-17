@@ -5,11 +5,10 @@
     const webpack = require("webpack");
 
     (function (extractCss, webpack2) {
-        const path = require("path");
-        const BundleTracker = require("webpack-bundle-tracker");
-        const rootAssetPath = path.join(__dirname, "static");
-
         module.exports = (env) => {
+            const path = require("path");
+            const BundleTracker = require("webpack-bundle-tracker");
+            const rootAssetPath = path.join(__dirname, "static");
             const isDevBuild = !(env && env.prod);
             return {
                 entry: {
