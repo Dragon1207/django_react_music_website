@@ -9,7 +9,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "react": "^16.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",
