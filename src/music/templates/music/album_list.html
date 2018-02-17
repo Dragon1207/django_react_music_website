@@ -1,6 +1,11 @@
-{% extends '_layouts/base.html' %} {% load thumbnail %} {% block title %}All Albums{% endblock title %} {% block headline
-%}
-<h2>All Albums</h2>{% endblock %} {% block content %}
+{% extends '_layouts/base.html' %} 
+{% load thumbnail %}
+
+{% block title %}All Albums{% endblock title %}
+
+{% block headline %}<h2>All Albums</h2>{% endblock %}
+
+{% block content %}
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <ul class="list-group">
@@ -26,14 +31,22 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
-                {% endif %} {% for pn in paginator.page_range %} {% if not forloop.first %} &nbsp;&nbsp;|&nbsp;&nbsp; {% endif %} {% if page_obj.number
-                != pn %}
-                <a href="{% url 'music:albums:list' %}{% query_builder request page=pn %}">
-                    {% endif %} {{ pn }} {% if page_obj.number != pn %}
-                </a>
-                {% endif %} {% endfor %} {% if page_obj.has_next %}
-                <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
+                    <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
+                {% endif %}
+                {% for pn in paginator.page_range %}
+                    {% if not forloop.first %}
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {% endif %}
+                    {% if page_obj.number != pn %}
+                        <a href="{% url 'music:albums:list' %}{% query_builder request page=pn %}">
+                    {% endif %}
+                    {{ pn }}
+                    {% if page_obj.number != pn %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
                 {% endif %}
             </span>
         </div>
