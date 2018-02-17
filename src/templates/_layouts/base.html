@@ -1,32 +1,36 @@
 {% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="yandex-verification" content="72cdc7b75bc6c751" />
     <title>{% block title %}{% endblock %} :: Music Website</title>
 
-    {% render_bundle "main" %} {% render_bundle "vendor" %}
+    {%  render_bundle "main" %}
+    {%  render_bundle "vendor" %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
 </head>
-
 <body>
     <header>{% include '_layouts/navbar.html' %}</header>
 
     <div class="container theme-showcase" role="main">
-        {% block headline %}{% endblock %} {% if messages %}
+        {% block headline %}{% endblock %}
+
+        {% if messages %}
         <div>
             <ul class="list-unstyled messages">
                 {% for message in messages %}
-                <li{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
+                <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
             </ul>
         </div>
-        {% endif %} {% block content %}{% endblock %} {% block styles %}{% endblock %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        {% block styles %}{% endblock %}
     </div>
 </body>
-
 </html>

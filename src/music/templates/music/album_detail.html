@@ -1,37 +1,46 @@
-{% extends '_layouts/base.html' %} {% load thumbnail %} {% block title %}Album {{ object }} detail{% endblock %} {% block
-headline %}
-<h2>Album {{ object }}</h2>
-{% with names=object.tags.names %} {% if names.count > 0 %}
-<p>Tags: {% for name in names %}{% if not forloop.first %}, {% endif %}
-    <a href="{% url 'music:albums:list' %}{% query_builder request tags=name page=None %}">{{ name }}</a>
-    {% endfor %}</p>
-<br> {% endif %} {% endwith %} {% endblock %} {% block content %}
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-        {% if object.album_logo %}
-        <img src="{% thumbnail album.album_logo 300x300 %}" /> {% endif %}
-        <h3>{{ object.artist }}</h3>
-        <form action="" method="post">{% csrf_token %}
-            <ul class="list-group">
-                {% for track in object.tracks.all %}
-                <li class="list-group-item">
-                    <input type="radio" id="id_favorite_tracks_{{ forloop.counter }}" name="favorite_track" value="{{ track.id }}" {% if forloop.counter==1
-                        %}checked{% endif %}/>
-                    <label for="track{{ forloop.counter }}">
-                        <a href="{{ object.get_absolute_url }}">{{ track.title }} - {{ track.file_type }}</a>
-                        {% if track.is_favorite %}
-                        <img src="http://i.imgur.com/b9b13Rd.png" /> {% endif %}
-                    </label>
-                    <br>
-                </li>
-                {% empty %}
-                <li class="list-group-item">Album has no tracks</li>
-                {% endfor %}
-            </ul>
-            <input type="submit" value="Favorite" class="btn btn-default" />
-        </form>
-        <a href="{% url 'music:albums:list' %}{% query_builder request %}">
-            << Go Back</a>
+{% extends '_layouts/base.html' %}
+{% load thumbnail %}
+
+{% block title %}Album {{ object }} detail{% endblock %}
+
+{% block headline %}<h2>Album {{ object }}</h2>
+    {% with names=object.tags.names %}
+        {% if names.count > 0 %}
+            <p>Tags: {% for name in names %}{% if not forloop.first %}, {% endif %}
+                <a href="{% url 'music:albums:list' %}{% query_builder request tags=name page=None %}">{{ name }}</a>
+            {% endfor %}</p>
+            <br>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            {% if object.album_logo %}
+                <img src="{% thumbnail album.album_logo 300x300 %}"/>
+            {% endif %}
+            <h3>{{ object.artist }}</h3>
+            <form action="" method="post">{% csrf_token %}
+                <ul class="list-group">
+                    {% for track in object.tracks.all %}
+                        <li class="list-group-item">
+                            <input type="radio" id="id_favorite_tracks_{{ forloop.counter }}" name="favorite_track"
+                                   value="{{ track.id }}" {% if forloop.counter == 1 %}checked{% endif %}/>
+                            <label for="track{{ forloop.counter }}">
+                                <a href="{{ object.get_absolute_url }}">{{ track.title }} - {{ track.file_type }}</a>
+                                {% if track.is_favorite %}
+                                    <img src="http://i.imgur.com/b9b13Rd.png"/>
+                                {% endif %}
+                            </label><br>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">Album has no tracks</li>
+                    {% endfor %}
+                </ul>
+                <input type="submit" value="Favorite" class="btn btn-default"/>
+            </form>
+            <a href="{% url 'music:albums:list' %}{% query_builder request %}"><< Go Back</a>
+        </div>
     </div>
-</div>
 {% endblock %}
