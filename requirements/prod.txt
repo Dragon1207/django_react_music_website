@@ -15,7 +15,7 @@ django-crispy-forms==1.7.0
 django-taggit==0.22.1
 taggit-selectize==2.3.0
 easy-thumbnails==2.5
-Pillow==4.2.1
+Pillow==4.3.0
 
 # Auth
 django-allauth==0.34.0
