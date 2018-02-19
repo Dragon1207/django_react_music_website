@@ -12,14 +12,21 @@ class Command(BaseCommand):
     help = 'Lint and check code style with flake8 and isort'
 
     def add_arguments(self, parser):
-        parser.add_argument('-f', '--fix-imports', action='store_true',
-                            help='Fix imports using isort, before linting')
+        parser.add_argument(
+            '-f',
+            '--fix-imports',
+            action='store_true',
+            help='Fix imports using isort, before linting')
 
     def handle(self, *args, **options):
-        skip = ['requirements', 'env', 'static']
+        skip = ('requirements', 'env', 'static', '__pycache__')
         root_files = glob('*.py')
-        root_directories = [name for name in next(os.walk('.'))[1] if not name.startswith('.')]
-        files_and_directories = [arg for arg in root_files + root_directories if arg not in skip]
+        root_directories = [
+            name for name in next(os.walk('.'))[1] if not name.startswith('.')
+        ]
+        files_and_directories = [
+            arg for arg in root_files + root_directories if arg not in skip
+        ]
 
         def execute_tool(description, *args2):
             """Execute a checking tool with its arguments."""
@@ -34,5 +41,7 @@ class Command(BaseCommand):
             scripts_path = os.path.join(scripts_path, 'Scripts')
 
         if options['fix_imports']:
-            execute_tool('Fixing import order', os.path.join(scripts_path, 'isort'), '-rc')
-        execute_tool('Checking code style', os.path.join(scripts_path, 'flake8'))
+            execute_tool('Fixing import order',
+                         os.path.join(scripts_path, 'isort'), '-rc')
+        execute_tool('Checking code style', os.path.join(
+            scripts_path, 'flake8'))
