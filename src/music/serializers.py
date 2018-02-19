@@ -49,12 +49,14 @@ class AlbumSerializer(serializers.ModelSerializer):
         if 'tracks' in validated_data:
             tracks_data = validated_data.pop('tracks', None)
             if tracks_data:
-                track_to_delete = instance.tracks.exclude(pk__in=[item.get('id', None) for item in tracks_data])
+                track_to_delete = instance.tracks.exclude(
+                    pk__in=[item.get('id', None) for item in tracks_data])
 
                 for item in tracks_data:
                     item_id = item.get('id', None)
                     if item_id:
-                        track_item = Track.objects.get(id=item_id, album=instance)
+                        track_item = Track.objects.get(
+                            id=item_id, album=instance)
                         track_item.title = item.get('title', track_item.title)
                         track_item.save()
                     else:
@@ -65,5 +67,5 @@ class AlbumSerializer(serializers.ModelSerializer):
             if track_to_delete:
                 track_to_delete.delete()
 
-        super(self.__class__, self).update(instance, validated_data)
+        super(AlbumSerializer, self).update(instance, validated_data)
         return instance
