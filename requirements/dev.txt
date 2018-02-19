@@ -2,18 +2,22 @@
 -r prod.txt
 
 # Debug toolbar
-django-debug-toolbar==1.8
+django-debug-toolbar==1.9.1
 
 # Testing
-factory-boy==2.9.2
-selenium==3.7.0
+factory-boy==2.10.0
+selenium==3.9.0
 coveralls~=1.2.0
 
 # Lint and code style
-flake8==3.4.1
+flake8==3.5.0
 flake8-blind-except==0.1.1
-flake8-isort==2.2.2
-flake8-debugger==1.4.0
-flake8-docstrings==1.1.0
-flake8-quotes==0.12.0
-pep8-naming==0.4.1
+flake8-isort==2.3
+flake8-debugger==3.1.0
+flake8-docstrings==1.3.0
+flake8-quotes==0.13.0
+pep8~=1.7.1
+pep8-naming==0.5.0
+pylint~=1.8.2
+pylint-django~=0.9.0
+yapf~=0.20.2
