@@ -68,14 +68,20 @@ class AlbumListViewTests(TestCase):
         request = self.factory.get('/')
         request.user = self.user
         response = AlbumList.as_view()(request)
-        self.assertEquals(list(response.context_data['object_list']), [],)
+        self.assertEquals(
+            list(response.context_data['object_list']),
+            [],
+        )
 
     def test_albums_in_context(self):
         request = self.factory.get('/')
         album = AlbumFactory()
         request.user = self.user
         response = AlbumList.as_view()(request)
-        self.assertEquals(list(response.context_data['object_list']), [album],)
+        self.assertEquals(
+            list(response.context_data['object_list']),
+            [album],
+        )
 
 
 class IntegrationTests(LiveServerTestCase):
@@ -84,9 +90,9 @@ class IntegrationTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.selenium = WebDriver(
-            executable_path=os.path.join(os.path.dirname(settings.BASE_DIR), 'node_modules', 'phantomjs-prebuilt',
-                                         'lib', 'phantom', 'bin', 'phantomjs')
-        ) if 'nt' == os.name else WebDriver()
+            executable_path=os.path.join(
+                os.path.dirname(settings.BASE_DIR), 'node_modules', 'phantomjs-prebuilt', 'lib', 'phantom', 'bin',
+                'phantomjs')) if os.name == 'nt' else WebDriver()
         cls.password = random_string_generator()
         cls.user = UserFactory(password=cls.password)
         super(IntegrationTests, cls).setUpClass()
@@ -120,7 +126,7 @@ class IntegrationTests(LiveServerTestCase):
                 'value': cookie.value,
                 'secure': False,
                 'path': '/',
-                'domain': '127.0.0.1'   # it is needed for PhantomJS due to the issue
+                'domain': '127.0.0.1'  # it is needed for PhantomJS due to the issue
                 # "selenium.common.exceptions.WebDriverException: Message: 'phantomjs' executable needs to be in PATH"
             })
         self.selenium.refresh()  # need to update page for logged in user
@@ -130,3 +136,6 @@ class IntegrationTests(LiveServerTestCase):
         self.selenium.find_element_by_xpath('//*[@id="submit-id-submit"]').click()
         self.assertEqual(1, Album.objects.count())
         self.assertEqual('raw album title', Album.objects.first().title)
+
+
+# TODO: Selenium support for PhantomJS has been deprecated, please use headless versions of Chrome or Firefox instead
