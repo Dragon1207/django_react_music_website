@@ -16,9 +16,7 @@ class AlbumQuerySet(models.QuerySet):
             queryset = queryset.filter(tags__name__in=tags).distinct()
         query = query_dict.get('query')
         if query:
-            queryset = queryset.filter(
-                Q(artist__icontains=query) |
-                Q(title__icontains=query)).distinct()
+            queryset = queryset.filter(Q(artist__icontains=query) | Q(title__icontains=query)).distinct()
         queryset = queryset.annotate(track_count=Count('tracks'))
         return queryset
 
@@ -69,7 +67,6 @@ class Track(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = '-'.join((
-                slugify(self.album.title, allow_unicode=True),
-                slugify(self.title, allow_unicode=True)))
+            self.slug = '-'.join((slugify(self.album.title, allow_unicode=True), slugify(
+                self.title, allow_unicode=True)))
         super(Track, self).save(*args, **kwargs)

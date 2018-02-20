@@ -24,6 +24,4 @@ class Migration(migrations.Migration):
         ('music', '0008_auto_20170822_2049'),
     ]
 
-    operations = [
-        migrations.RunPython(populate_slug)
-    ]
+    operations = [migrations.RunPython(populate_slug)]

@@ -23,8 +23,16 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=250)),
                 ('is_favorite', models.BooleanField(default=False)),
                 ('slug', models.SlugField(max_length=250, unique=True)),
-                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tracks', to='music.Album')),
-                ('tags', taggit_selectize.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
+                ('album',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE, related_name='tracks', to='music.Album')),
+                ('tags',
+                 taggit_selectize.managers.TaggableManager(
+                     blank=True,
+                     help_text='A comma-separated list of tags.',
+                     through='taggit.TaggedItem',
+                     to='taggit.Tag',
+                     verbose_name='Tags')),
             ],
             options={
                 'ordering': ('album', 'title'),
@@ -38,7 +46,5 @@ class Migration(migrations.Migration):
             model_name='song',
             name='tags',
         ),
-        migrations.DeleteModel(
-            name='Song',
-        ),
+        migrations.DeleteModel(name='Song', ),
     ]

@@ -22,12 +22,7 @@ class SearchForm(forms.Form):
         self.helper.form_class = 'navbar-form navbar-left'
         self.helper.attrs = {'role': 'search'}
         self.helper.form_method = 'GET'
-        self.helper.layout = Layout(
-            FieldWithButtons(
-                Field('query', autofocus='autofocus'),
-                Submit('', 'Search')
-            )
-        )
+        self.helper.layout = Layout(FieldWithButtons(Field('query', autofocus='autofocus'), Submit('', 'Search')))
 
 
 class AlbumFavoriteForm(forms.Form):
@@ -45,9 +40,7 @@ class AlbumFavoriteForm(forms.Form):
 
     def save(self):
         if self.errors:
-            raise ValueError(
-                "The AlbumFavoriteForm could not be saved because the data didn't validate."
-            )
+            raise ValueError("The AlbumFavoriteForm could not be saved because the data didn't validate.")
         self.instance.set_favorite_track(self.cleaned_data['favorite_track'])
 
 
@@ -55,14 +48,12 @@ class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
         fields = ('artist', 'title', 'genre', 'album_logo', 'tags')
-        widgets = {'tags': TagSelectize(), }
+        widgets = {
+            'tags': TagSelectize(),
+        }
 
     def __init__(self, *args, **kwargs):
         super(AlbumForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.layout = Layout(
-            'artist', 'title', 'genre', 'album_logo', 'tags',
-            FormActions(
-                Submit('submit', 'Submit')
-            )
-        )
+        self.helper.layout = Layout('artist', 'title', 'genre', 'album_logo', 'tags',
+                                    FormActions(Submit('submit', 'Submit')))
