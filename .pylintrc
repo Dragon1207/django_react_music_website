@@ -1,5 +1,5 @@
 [MESSAGES CONTROL]
-disable=fixme
+disable=fixme, C0111
 
 [FORMAT]
 max-line-length=120
