@@ -9,13 +9,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'music:albums:list' %}">Music website</a>
+      <a class="navbar-brand" href="{% url 'albums:list' %}">Music website</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            {% url 'music:albums:list' as home %}
+            {% url 'albums:list' as home %}
             <li {% if request.path == home %} class="active" {% endif %}>
-                <a href="{% url 'music:albums:list' %}">
+                <a href="{% url 'albums:list' %}">
                     <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Albums
                 </a>
             </li>
@@ -29,7 +29,7 @@
         <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}
                 <li>
-                    <a href="{% url 'music:albums:create' %}{% query_builder request %}">
+                    <a href="{% url 'albums:create' %}{% query_builder request %}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Album
                     </a>
                 </li>

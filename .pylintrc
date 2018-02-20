@@ -3,3 +3,7 @@ disable=fixme, C0111
 
 [FORMAT]
 max-line-length=120
+
+[DESIGN]
+# To supress R0901:Too many ancestors warning for mixins
+max-parents=18

@@ -7,7 +7,7 @@
     {% with names=object.tags.names %}
         {% if names.count > 0 %}
             <p>Tags: {% for name in names %}{% if not forloop.first %}, {% endif %}
-                <a href="{% url 'music:albums:list' %}{% query_builder request tags=name page=None %}">{{ name }}</a>
+                <a href="{% url 'albums:list' %}{% query_builder request tags=name page=None %}">{{ name }}</a>
             {% endfor %}</p>
             <br>
         {% endif %}
@@ -16,7 +16,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-7 col-sm-offset-3">
             {% if object.album_logo %}
                 <img src="{% thumbnail album.album_logo 300x300 %}"/>
             {% endif %}
@@ -40,7 +40,7 @@
                 </ul>
                 <input type="submit" value="Favorite" class="btn btn-default"/>
             </form>
-            <a href="{% url 'music:albums:list' %}{% query_builder request %}"><< Go Back</a>
+            <a href="{% url 'albums:list' %}{% query_builder request %}"><< Go Back</a>
         </div>
     </div>
 {% endblock %}

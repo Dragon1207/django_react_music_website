@@ -14,26 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls import include, path
 from django.views.generic import RedirectView
+from rest_framework.routers import DefaultRouter
 
-from music.urls import router
+ROUTER = DefaultRouter()
 
 urlpatterns = [
-    url(r'^music/', include('music.urls', namespace='music')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls)),
-    url(r'^$', RedirectView.as_view(pattern_name='music:albums:list'), name='home'),
-    url(r'^accounts/', include('allauth.urls')),
-    url(r'^taggit/', include('taggit_selectize.urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('albums/', include('album.urls', namespace='albums')),
+    path('tracks/', include('track.urls', namespace='tracks')),
+    path('admin/', admin.site.urls),
+    path('api/', include(ROUTER.urls)),
+    path('', RedirectView.as_view(pattern_name='albums:list'), name='home'),
+    path('accounts/', include('allauth.urls')),
+    path('taggit/', include('taggit_selectize.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # TODO: Implement 2FA & update corresponding Cover letter
 # TODO: Implement TBA using django-allauth & update corresponding Cover letter

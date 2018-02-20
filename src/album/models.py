@@ -1,6 +1,6 @@
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count, Q
+from django.urls import reverse
 from django.utils.text import slugify
 from taggit_selectize.managers import TaggableManager
 
@@ -43,30 +43,9 @@ class Album(models.Model):
         return f'{self.title} . {self.artist}'
 
     def get_absolute_url(self):
-        return reverse('music:albums:detail', kwargs={'slug': self.slug})
+        return reverse('albums:detail', kwargs={'slug': self.slug})
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.slug:
             self.slug = '-'.join((slugify(self.artist, allow_unicode=True), slugify(self.title, allow_unicode=True)))
-        super(Album, self).save(*args, **kwargs)
-
-
-class Track(models.Model):
-    class Meta:
-        ordering = ('album', 'title')
-
-    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.CASCADE)
-    file_type = models.CharField(max_length=10)
-    title = models.CharField(max_length=250)
-    is_favorite = models.BooleanField(default=False)
-    tags = TaggableManager(blank=True)
-    slug = models.SlugField(max_length=250, unique=True)
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = '-'.join((slugify(self.album.title, allow_unicode=True), slugify(
-                self.title, allow_unicode=True)))
-        super(Track, self).save(*args, **kwargs)
+        super(Album, self).save(force_insert, force_update, using, update_fields)

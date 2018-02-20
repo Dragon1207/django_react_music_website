@@ -2,23 +2,16 @@ from braces.views import SetHeadlineMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
-from django.views.generic.base import ContextMixin, View
 from rest_framework import viewsets
 
-from music import forms
-from music.forms import SearchForm
-from music.models import Album, Track
-from music.serializers import AlbumSerializer, TrackSerializer
+import album.forms
+from album.models import Album
+from album.serializers import AlbumSerializer
+from search.views import SearchFormMixin
 
 
-class SearchFormMixin(ContextMixin, View):
-    def get_context_data(self, **kwargs):
-        context = super(SearchFormMixin, self).get_context_data(**kwargs)
-        context['search_form'] = SearchForm(self.request.GET)
-        return context
-
-
-class AlbumList(SearchFormMixin, ListView):
+# class AlbumList(SearchFormMixin, ListView):
+class AlbumList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
@@ -28,16 +21,16 @@ class AlbumList(SearchFormMixin, ListView):
 class AlbumDetail(SearchFormMixin, DetailView, UpdateView):
     model = Album
     http_method_names = ['get', 'post']
-    form_class = forms.AlbumFavoriteForm
-    template_name = 'music/album_detail.html'
+    form_class = album.forms.AlbumFavoriteForm
+    template_name = 'album/album_detail.html'
 
     def get_success_url(self):
-        return reverse('music:albums:detail', kwargs=self.kwargs)
+        return reverse('albums:detail', kwargs=self.kwargs)
 
 
 class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateView):
     model = Album
-    form_class = forms.AlbumForm
+    form_class = album.forms.AlbumForm
     headline = 'Add Album'
 
     def get_initial(self):
@@ -49,7 +42,7 @@ class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateV
 
 class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, UpdateView):
     model = Album
-    form_class = forms.AlbumForm
+    form_class = album.forms.AlbumForm
     headline = 'Update Album'
 
 
@@ -57,7 +50,7 @@ class AlbumDelete(LoginRequiredMixin, SearchFormMixin, DeleteView):
     model = Album
 
     def get_success_url(self):
-        url = reverse('music:albums:list')
+        url = reverse('albums:list')
         query = self.request.GET.urlencode()
         if query:
             url = f'{url}?{query}'
@@ -69,13 +62,3 @@ class AlbumViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Album.objects.list(self.request.GET)
-
-
-class TrackViewSet(viewsets.ModelViewSet):
-    serializer_class = TrackSerializer
-
-    def get_queryset(self):
-        return Track.objects.all()
-
-
-# TODO: Write tests for the API calls

@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-7 col-sm-offset-3">
             <ul class="list-group">
                 {% for album in object_list %}
                     <li class="list-group-item">
@@ -17,10 +17,10 @@
                         </a>
                         <span class="badge">{{ album.track_count }}</span>>
                         {% if user.is_authenticated %}
-                            <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:albums:update' slug=album.slug %}{% query_builder request %}">
+                            <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'albums:update' slug=album.slug %}{% query_builder request %}">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
-                            <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'music:albums:delete' album.slug %}{% query_builder request %}">
+                            <a class="btn btn-default btn-sm" aria-hidden="true" href="{% url 'albums:delete' album.slug %}{% query_builder request %}">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         {% endif %}
@@ -33,14 +33,14 @@
                 <div class="pagination">
                     <span class="page-links">
                         {% if page_obj.has_previous %}
-                            <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
+                            <a href="{% url 'albums:list' %}{% query_builder request page=page_obj.previous_page_number %}">&lt;</a>
                         {% endif %}
                         {% for pn in paginator.page_range %}
                             {% if not forloop.first %}
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
                             {% endif %}
                             {% if page_obj.number != pn %}
-                                <a href="{% url 'music:albums:list' %}{% query_builder request page=pn %}">
+                                <a href="{% url 'albums:list' %}{% query_builder request page=pn %}">
                             {% endif %}
                             {{ pn }}
                             {% if page_obj.number != pn %}
@@ -48,7 +48,7 @@
                             {% endif %}
                         {% endfor %}
                         {% if page_obj.has_next %}
-                            <a href="{% url 'music:albums:list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
+                            <a href="{% url 'albums:list' %}{% query_builder request page=page_obj.next_page_number%}">&gt;</a>
                         {% endif %}
                     </span>
                 </div>
