@@ -162,8 +162,7 @@ WEBPACK_LOADER = {
     }
 }
 # This import should be placed after SECRET_KEY & WEBPACK_LOADER settings
-# pylint: disable=C0413
-from webpack_loader.utils import get_files  # noqa isort:skip
+from webpack_loader.utils import get_files  # noqa isort:skip pylint: disable=C0413
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
