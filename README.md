@@ -9,7 +9,7 @@ Django-based Music website created during the video serie [Django Tutorials for 
 Used technologies:
 
 - Python & Django
-- Testing: Selenium & PhantomJS & Factory Boy
+- Testing: Selenium & Headless Chrome & Factory Boy
 - Assets management: NPM & Webpack
 - Travis CI
 - Deployed at [Heroku](https://django-music-website.herokuapp.com)
