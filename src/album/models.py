@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import Count, Q
 from django.urls import reverse
-from django.utils.text import slugify
+
+from autoslug import AutoSlugField
 from taggit_selectize.managers import TaggableManager
 
 
@@ -21,6 +22,10 @@ class AlbumQuerySet(models.QuerySet):
         return queryset
 
 
+def get_slug(instance):
+    return f'{instance.artist}-{instance.title}'
+
+
 class Album(models.Model):
     class Meta:
         ordering = ('artist', 'title')
@@ -30,7 +35,7 @@ class Album(models.Model):
     genre = models.CharField(max_length=100)
     album_logo = models.ImageField(null=True, blank=True)
     tags = TaggableManager(blank=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug = AutoSlugField(populate_from=get_slug, unique=True)
 
     objects = AlbumQuerySet.as_manager()
 
@@ -44,8 +49,3 @@ class Album(models.Model):
 
     def get_absolute_url(self):
         return reverse('albums:detail', kwargs={'slug': self.slug})
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.slug:
-            self.slug = '-'.join((slugify(self.artist, allow_unicode=True), slugify(self.title, allow_unicode=True)))
-        super(Album, self).save(force_insert, force_update, using, update_fields)
