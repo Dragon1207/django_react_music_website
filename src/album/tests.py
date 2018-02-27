@@ -121,9 +121,9 @@ class IntegrationTests(LiveServerTestCase):
                 'value': cookie.value,
                 'secure': False,
                 'path': '/',
-                'domain':
-                '127.0.0.1'  # it is needed for PhantomJS due to the issue
-                # "selenium.common.exceptions.WebDriverException: Message: 'phantomjs' executable needs to be in PATH"
+                # it is needed for PhantomJS due to the issue "selenium.common.exceptions.WebDriverException:
+                # Message: 'phantomjs' executable needs to be in PATH"
+                'domain': '127.0.0.1'
             })
         self.selenium.refresh()  # need to update page for logged in user
         self.selenium.find_element_by_id('id_artist').send_keys('raw artist')
