@@ -1,5 +1,6 @@
-import factory
 from django.test import TestCase
+
+import factory
 
 from album.tests import AlbumFactory
 from track.models import Track

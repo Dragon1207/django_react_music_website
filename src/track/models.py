@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+
 from taggit_selectize.managers import TaggableManager
 
 from album.models import Album

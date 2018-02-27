@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django import forms
+from django.urls import reverse
+
 from crispy_forms.bootstrap import FieldWithButtons
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Layout, Submit
-from django import forms
-from django.urls import reverse
 
 
 class SearchForm(forms.Form):
