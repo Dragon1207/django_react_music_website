@@ -21,7 +21,7 @@ Used technologies:
     cd music_website
     pip install -r requirements.txt
     npm install
-    node node_modules/webpack/bin/webpack.js
+    npm run webpack:deploy
     python manage.py collectstatic
     python manage.py runserver
 ```
