@@ -1,12 +1,13 @@
 import random
 import string
 
-import chromedriver_binary
-import factory
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase, RequestFactory, TestCase
 from django.urls import reverse
+
+import chromedriver_binary
+import factory
 from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.chrome.options import Options
 
