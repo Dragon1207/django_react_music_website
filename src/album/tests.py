@@ -79,6 +79,10 @@ class IntegrationTests(LiveServerTestCase):
     def setUpClass(cls):
         chrome_options = Options()
         chrome_options.add_argument('--headless')
+        # Following two lines needed to fix "selenium.common.exceptions.WebDriverException: Message: unknown error:
+        # Chrome failed to start: crashed" in Travis CI
+        chrome_options.add_argument('--window-size=1024,768')
+        chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--log-level=3')
         cls.selenium = webdriver.WebDriver(
             executable_path=chromedriver_binary.chromedriver_filename, chrome_options=chrome_options)
