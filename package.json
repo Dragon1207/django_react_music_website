@@ -7,25 +7,28 @@
     }
   },
   "dependencies": {
-    "autoprefixer": "^7.1.5",
     "bootstrap": "^3.3.7",
-    "css-loader": "^0.28.7",
-    "expose-loader": "^0.7.3",
-    "extract-text-webpack-plugin": "^3.0.1",
-    "file-loader": "^1.1.5",
-    "jquery": "^3.2.1",
-    "postcss-loader": "^2.0.8",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.8.1",
-    "webpack-bundle-tracker": "^0.2.0"
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "^4.9.0",
-    "eslint-plugin-react": "^7.4.0"
+    "autoprefixer": "^8.1.0",
+    "babel-eslint": "^8.2.2",
+    "css-loader": "^0.28.10",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint": "^4.18.2",
+    "expose-loader": "^0.7.4",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "file-loader": "1.1.11",
+    "postcss-loader": "^2.1.1",
+    "url-loader": "1.0.1",
+    "webpack-bundle-tracker": "^0.2.1",
+    "webpack-cli": "^2.0.10",
+    "webpack": "^4.0.1"
   },
   "scripts": {
-    "webpack:deploy": "webpack --config ./webpack.config.js --progress",
-    "heroku-postbuild": "npm run webpack:deploy"
+    "dev": "webpack --mode development --config ./webpack.config.js --progress",
+    "build": "webpack --mode production --config ./webpack.config.js --progress",
+    "heroku-postbuild": "npm run build"
   }
 }
