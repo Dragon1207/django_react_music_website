@@ -9,7 +9,7 @@ django-autoslug-iplweb~=1.9.4.dev0
 
 # Database
 dj-database-url==0.4.2
-psycopg2==2.7.4
+psycopg2-binary~=2.7.4
 
 # Forms
 django-crispy-forms==1.7.0
