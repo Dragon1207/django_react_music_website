@@ -67,7 +67,7 @@ class AlbumViewSet(viewsets.ModelViewSet):
 
 
 class ReactSample(TemplateView):
-    template_name = 'react_sample.html'
+    template_name = 'album/react_sample.html'
 
 
 # TODO: Write tests for the API calls
