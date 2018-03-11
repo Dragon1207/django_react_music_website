@@ -34,7 +34,7 @@
     "webpack": "^4.0.1"
   },
   "scripts": {
-    "dev": "webpack --mode development --config ./webpack.config.js --progress && activate Django && python ./src/manage.py collectstatic",
+    "dev": "webpack --mode development --config ./webpack.config.js --progress && activate Django && python ./src/manage.py collectstatic --noinput",
     "build": "webpack --mode production --config ./webpack.config.js --progress",
     "heroku-postbuild": "npm run build"
   }
