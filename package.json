@@ -15,6 +15,10 @@
   "devDependencies": {
     "autoprefixer": "^8.1.0",
     "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.10",
     "eslint-plugin-react": "^7.7.0",
     "eslint": "^4.18.2",
@@ -22,6 +26,7 @@
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "1.1.11",
     "postcss-loader": "^2.1.1",
+    "react-dom": "^16.2.0",
     "url-loader": "1.0.1",
     "webpack-bundle-tracker": "^0.2.1",
     "webpack-cli": "^2.0.10",
@@ -29,7 +34,7 @@
     "webpack": "^4.0.1"
   },
   "scripts": {
-    "dev": "webpack --mode development --config ./webpack.config.js --progress",
+    "dev": "webpack --mode development --config ./webpack.config.js --progress && activate Django && python ./src/manage.py collectstatic",
     "build": "webpack --mode production --config ./webpack.config.js --progress",
     "heroku-postbuild": "npm run build"
   }

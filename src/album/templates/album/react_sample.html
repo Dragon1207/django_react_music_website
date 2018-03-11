@@ -1,8 +1,20 @@
 {% extends '_layouts/base.html' %} 
 {% load render_bundle from webpack_loader %}
 
-{% block scripts %} 
-    {% render_bundle "react" %}
+{% block content %} 
+    <div id='container'>
+        <div class='loading-indicator'>
+            Loading...
+        </div>
+    </div>
 {% endblock %}
 
-{% block content %} hello {% endblock %}
+{% block scripts %} {{ block.super }}
+    {% render_bundle "react_vendor" %}
+    {% render_bundle "react_main" %}
+    <script>
+        window.onload = function () {
+            react_app.init();
+        };
+    </script>
+{% endblock %}
