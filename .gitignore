@@ -64,6 +64,7 @@ fabric.properties
 /static/manifest.json
 /static/static/
 /static/static-only/
+/src/app/dist/
 /**/.coverage
 
 # Byte-compiled / optimized / DLL files

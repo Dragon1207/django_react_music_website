@@ -136,7 +136,8 @@ MEDIA_URL = '/media/'
 
 if DEBUG:
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static', 'static-only')
-    STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'static'), )
+    STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'static'),
+                        os.path.join(os.path.dirname(BASE_DIR), 'src', 'app', 'dist'))
     INTERNAL_IPS = ['127.0.0.1']
 
 WEBPACK_LOADER = {
