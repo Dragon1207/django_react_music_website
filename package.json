@@ -3,13 +3,46 @@
   "version": "0.0.1",
   "eslintConfig": {
     "env": {
-      "es6": true
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "jsx": true
+      },
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        4
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
     }
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0"
   },
   "devDependencies": {
@@ -20,18 +53,18 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.10",
+    "eslint": "^4.19.0",
     "eslint-plugin-react": "^7.7.0",
-    "eslint": "^4.18.2",
     "expose-loader": "^0.7.4",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "1.1.11",
     "postcss-loader": "^2.1.1",
     "react-dom": "^16.2.0",
     "url-loader": "1.0.1",
+    "webpack": "^4.0.1",
     "webpack-bundle-tracker": "^0.2.1",
     "webpack-cli": "^2.0.10",
-    "webpack-merge": "^4.1.2",
-    "webpack": "^4.0.1"
+    "webpack-merge": "^4.1.2"
   },
   "scripts": {
     "dev": "webpack --mode development --config ./webpack.config.js --progress && activate Django && python ./src/manage.py collectstatic --noinput",
