@@ -1,14 +1,22 @@
 // jshint esversion: 6
-import React from 'react';
+import { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-function HelloMessage(props) {
-    return (
-        <div className='message'>
-            Hello, {props.name}
-        </div>
-    )
+class HelloMessage extends Component {
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+    };
+
+    render() {
+        return <div className='message'>
+            Hello, {this.props.name}
+        </div>;
+    }
 }
+// HelloMessage.propTypes = {
+//     name: PropTypes.string.isRequired,
+// };
 
 module.exports = {
     init: function () {
@@ -16,5 +24,3 @@ module.exports = {
         ReactDOM.render(< HelloMessage name='PyCon LT' />, container);
     }
 };
-
-// ReactDOM.render(< div > Hello! < /div>, document.getElementById('container'));
