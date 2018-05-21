@@ -2,22 +2,21 @@
 (function () {
     'use strict';
     const ExtractTextPlugin = require('extract-text-webpack-plugin');
-    const webpack = require('webpack');
     const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-    (function (extractMainCss, extractVendorCss, webpack2) {
+    (function (extractMainCss, extractVendorCss) {
         module.exports = (env, argv) => {
             const BundleTracker = require('webpack-bundle-tracker');
             const path = require('path');
             const isDevMode = argv.mode === 'development';
-            const merge = require("webpack-merge");
+            const merge = require('webpack-merge');
             const staticDir = path.resolve('./static');
             const srcDir = path.resolve('./src');
             const djangoOutDir = path.join(staticDir, 'static');
             const reactOutDir = path.join(srcDir, 'app', 'dist');
             const cleanOptions = {
                 exclude: ['vendor.js', 'vendor.css', 'selectize.js', 'selectize.css', 'admin', 'rest_framework', 'taggit_selectize']
-            }
+            };
 
             const sharedConfig = {
                 context: __dirname,
@@ -109,7 +108,7 @@
                 plugins: [
                     new CleanWebpackPlugin(path.join(reactOutDir, '*.*'))
                 ]
-            })
+            });
 
             const reactVendorConfig = merge(reactSharedConfig, {
                 entry: {
@@ -164,5 +163,5 @@
 
             return [djangoVendorConfig, djangoMainConfig, reactVendorConfig, reactMainConfig];
         };
-    }(new ExtractTextPlugin('[name].[chunkhash].css'), new ExtractTextPlugin('[name].css'), webpack));
+    }(new ExtractTextPlugin('[name].[chunkhash].css'), new ExtractTextPlugin('[name].css')));
 }());
