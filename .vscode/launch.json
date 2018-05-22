@@ -17,8 +17,7 @@
                 "--noreload",
                 "--nothreading"
             ],
-            "env": {},
-            "envFile": "${workspaceFolder}/.env",
+            "envFile": "",
             "debugOptions": [
                 "RedirectOutput",
                 "Django"
