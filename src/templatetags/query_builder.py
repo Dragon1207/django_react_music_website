@@ -8,6 +8,8 @@ register = template.Library()
 @register.simple_tag
 def query_builder(request, **kwargs):
     updated = request.GET.copy()
+    if 'react' in updated:
+        updated.pop('react')
     for k, value in kwargs.items():
         if (k == 'page' and isinstance(value, int) and int(value) > 1) or (k != 'page' and value is not None):
             updated[k] = value

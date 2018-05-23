@@ -41,6 +41,12 @@ class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateV
             initial['tags'] = self.request.GET.get('tags')
         return initial
 
+    def get_template_names(self):
+        template = super().get_template_names()
+        if self.request.GET.get('react'):
+            template[0] = template[0].replace('.', '_react.')
+        return template
+
 
 class AlbumUpdate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, UpdateView):
     model = Album
@@ -64,10 +70,6 @@ class AlbumViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Album.objects.list(self.request.GET)
-
-
-class ReactSample(TemplateView):
-    template_name = 'album/react_sample.html'
 
 
 # TODO: Write tests for the API calls
