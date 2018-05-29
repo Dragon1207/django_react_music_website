@@ -1,6 +1,8 @@
 # Everything the developer needs in addition to the production requirements
 -r prod.txt
 
+django-webpack-loader==0.5.0
+
 # Debug toolbar
 django-debug-toolbar==1.9.1
 

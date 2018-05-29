@@ -4,24 +4,28 @@
     const ExtractTextPlugin = require('extract-text-webpack-plugin');
     const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-    (function (extractMainCss, extractVendorCss) {
+    (function (extractMainCss, extractVendorCss, webpack) {
         module.exports = (env, argv) => {
             const BundleTracker = require('webpack-bundle-tracker');
             const path = require('path');
             const isDevMode = argv.mode === 'development';
+            const isHot = !!argv.hot;
+            const webpackDevServerPath = 'http://localhost:3000';
+            let publicPath = '/static/';
+            if (isDevMode && isHot) {
+                publicPath = webpackDevServerPath + publicPath;
+            }
             const merge = require('webpack-merge');
             const staticDir = path.resolve('./static');
-            const srcDir = path.resolve('./src');
-            const djangoOutDir = path.join(staticDir, 'static');
-            const reactOutDir = path.join(srcDir, 'app', 'dist');
-            const cleanOptions = {
-                exclude: ['vendor.js', 'vendor.css', 'selectize.js', 'selectize.css', 'admin', 'rest_framework', 'taggit_selectize']
-            };
+            const outDir = path.join(staticDir, 'static');
 
             const sharedConfig = {
                 context: __dirname,
+                mode: argv.mode || 'development',
+                entry: isDevMode && isHot ? ['webpack-dev-server/client?' + webpackDevServerPath] : undefined,
                 output: {
-                    publicPath: '/static/',
+                    path: outDir,
+                    publicPath: publicPath,
                     filename: '[name].[hash].js'
                 },
                 module: {
@@ -32,31 +36,39 @@
                 },
                 plugins: [
                     new BundleTracker({
-                        filename: path.join('static', 'manifest.json')
-                    })
-                ]
+                        filename: path.join(staticDir, 'manifest.json')
+                    }),
+                    new CleanWebpackPlugin(path.join(outDir, '*.*'))
+                ],
+                devServer: {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                }
             };
 
             const djangoSharedConfig = merge(sharedConfig, {
-                output: {
-                    path: djangoOutDir
-                },
                 plugins: [
                     new CleanWebpackPlugin([
-                        path.join(djangoOutDir, '*.*'),
                         path.join(staticDir, 'static-only', '*.*'),
-                    ], cleanOptions)
+                    ], {
+                        exclude: ['django_vendor.js', 'django_vendor.css', 'selectize.js', 'selectize.css', 'admin',
+                            'rest_framework', 'taggit_selectize'
+                        ]
+                    })
                 ]
             });
 
             const djangoVendorConfig = merge(djangoSharedConfig, {
                 entry: {
-                    vendor: [
+                    django_vendor: [
                         'jquery', // jQuery is required by taggit-selectize
                         'bootstrap',
                         'bootstrap/dist/css/bootstrap.css'
                     ],
-                    selectize: path.join(staticDir, 'css', 'taggit_selectize', 'css', 'selectize.bootstrap3.css')
+                    selectize: [
+                        path.join(staticDir, 'css', 'taggit_selectize', 'css', 'selectize.bootstrap3.css')
+                    ]
                 },
                 output: {
                     filename: '[name].js'
@@ -81,7 +93,7 @@
 
             const djangoMainConfig = merge(djangoSharedConfig, {
                 entry: {
-                    main: [
+                    django_main: [
                         path.join(staticDir, 'css', 'main.css'),
                         path.join(staticDir, 'img', 'background.png')
                     ]
@@ -101,16 +113,7 @@
                 ]
             });
 
-            const reactSharedConfig = merge(sharedConfig, {
-                output: {
-                    path: reactOutDir
-                },
-                plugins: [
-                    new CleanWebpackPlugin(path.join(reactOutDir, '*.*'))
-                ]
-            });
-
-            const reactVendorConfig = merge(reactSharedConfig, {
+            const reactVendorConfig = merge(sharedConfig, {
                 entry: {
                     react_vendor: 'react'
                 },
@@ -128,16 +131,20 @@
                     }]
                 },
                 plugins: [
-                    extractVendorCss
+                    extractVendorCss,
+                    new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
                 ]
             });
 
-            const reactMainConfig = merge(reactSharedConfig, {
+            const reactMainConfig = merge(sharedConfig, {
                 entry: {
-                    react_main: path.join(srcDir, 'app', 'src', 'index.jsx')
+                    main: path.join(__dirname, 'src', 'app', 'src', 'index.jsx')
                 },
                 output: {
                     library: 'react_app'
+                },
+                resolve: {
+                    extensions: ['.js', '.jsx', '.json']
                 },
                 module: {
                     rules: [{
@@ -145,8 +152,8 @@
                         loader: 'babel-loader',
                         exclude: /node_modules/,
                         query: {
-                            'plugins': ['transform-class-properties'],
-                            presets: ['es2015', 'react']
+                            'plugins': ['transform-class-properties', 'react-hot-loader/babel'],
+                            presets: ['es2015', 'react'],
                         }
                     }, {
                         test: /\.css(\?|$)/,
@@ -154,7 +161,8 @@
                             use: [
                                 isDevMode ? 'css-loader' : 'css-loader?minimize', 'postcss-loader'
                             ]
-                        })
+                        }),
+                        exclude: /node_modules/,
                     }]
                 },
                 plugins: [
@@ -164,5 +172,5 @@
 
             return [djangoVendorConfig, djangoMainConfig, reactVendorConfig, reactMainConfig];
         };
-    }(new ExtractTextPlugin('[name].[chunkhash].css'), new ExtractTextPlugin('[name].css')));
+    }(new ExtractTextPlugin('[name].[chunkhash].css'), new ExtractTextPlugin('[name].css'), new require('webpack')));
 }());

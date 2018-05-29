@@ -1,17 +1,20 @@
 {% extends '_layouts/base.html' %} 
 {% load render_bundle from webpack_loader %}
 
+{% block title %}Add a New Album{% endblock %}
+
+{% block headline %}<h2>{{ headline }}</h2>{% endblock %}
+
 {% block content %} 
-    <div id='container'>
-        <div class='loading-indicator'>
-            Loading...
-        </div>
+    <div id='container' class="container-fluid">
+        <i class="fa fa-lg fa-spinner fa-spin"></i><br><br>
+        <i class="pending">Loading components...</i><br><br>
     </div>
 {% endblock %}
 
 {% block scripts %} {{ block.super }}
     {% render_bundle "react_vendor" %}
-    {% render_bundle "react_main" %}
+    {% render_bundle "main" %}
     <script>
         window.onload = function () {
             react_app.init();

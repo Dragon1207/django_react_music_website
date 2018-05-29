@@ -1,6 +1,7 @@
 {
   "name": "music_website",
   "version": "0.0.1",
+  "license": "MIT",
   "eslintConfig": {
     "parser": "babel-eslint",
     "env": {
@@ -35,8 +36,12 @@
       "semi": [
         "error",
         "always"
-      ]
+      ],
+      "no-console": "off"
     }
+  },
+  "jshintConfig": {
+    "node": true
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -48,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
@@ -61,15 +67,20 @@
     "file-loader": "1.1.11",
     "postcss-loader": "^2.1.1",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.2.0",
     "url-loader": "1.0.1",
-    "webpack": "^4.0.1",
+    "webpack": "^4.8.3",
     "webpack-bundle-tracker": "^0.2.1",
-    "webpack-cli": "^2.0.10",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.1.2"
   },
   "scripts": {
-    "dev": "webpack --mode development --config ./webpack.config.js --progress && activate Django && python ./src/manage.py collectstatic --noinput",
-    "build": "webpack --mode production --config ./webpack.config.js --progress",
-    "heroku-postbuild": "npm run build"
+    "start": "webpack-dev-server --inline --hot --progress --port 3000 --mode development",
+    "watch": "webpack -d --mode development --config webpack.config.js --watch",
+    "build": "webpack -d --mode development --config ./webpack.config.js --progress && yarn run collectstatic",
+    "build:prod": "webpack -p --mode production --config ./webpack.config.js --progress",
+    "collectstatic": "activate Django && python ./src/manage.py collectstatic --noinput",
+    "heroku-postbuild": "yarn run build"
   }
 }

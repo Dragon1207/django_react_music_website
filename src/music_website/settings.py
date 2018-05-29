@@ -136,8 +136,7 @@ MEDIA_URL = '/media/'
 
 if DEBUG:
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static', 'static-only')
-    STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'static'),
-                        os.path.join(os.path.dirname(BASE_DIR), 'src', 'app', 'dist'))
+    STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'static'), )
     INTERNAL_IPS = ['127.0.0.1']
 
 WEBPACK_LOADER = {
@@ -209,8 +208,9 @@ TAGGIT_TAGS_FROM_STRING = 'taggit_selectize.utils.parse_tags'
 TAGGIT_STRING_FROM_TAGS = 'taggit_selectize.utils.join_tags'
 
 # Disable it if you need to work with taggit-selectize in django-admin
+# In case of HMR webpack-dev-server URL will be used
 TAGGIT_SELECTIZE = {
-    'CSS_FILENAMES': (os.path.basename(get_files('selectize', extension='css')[0]['path']), ),
+    'CSS_FILENAMES': (get_files('selectize', extension='css')[0]['publicPath'], ),
 }
 
 REST_FRAMEWORK = {
