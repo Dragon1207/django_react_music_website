@@ -152,7 +152,7 @@
                         loader: 'babel-loader',
                         exclude: /node_modules/,
                         query: {
-                            'plugins': ['transform-class-properties', 'react-hot-loader/babel'],
+                            'plugins': ['transform-class-properties', 'react-hot-loader/babel', 'transform-object-rest-spread'],
                             presets: ['es2015', 'react'],
                         }
                     }, {

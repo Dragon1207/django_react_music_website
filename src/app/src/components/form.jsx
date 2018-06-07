@@ -1,97 +1,84 @@
 // jshint esversion: 6
 
+import { Button, Col, ControlLabel, FormGroup, HelpBlock, Panel, Row } from 'react-bootstrap';
+import { Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
-import { bool, object, string } from 'yup';
+import { object, string } from 'yup';
 
 import DjangoCSRFToken from 'django-react-csrftoken';
-import { Formik } from 'formik';
+import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import uniqueId from 'react-html-id';
+
+const InputElement = ({ field, form, ...rest }) => {
+    const name = field.name;
+    const error = form.errors[name];
+    const label = `${name.charAt(0).toUpperCase()}${name.slice(1).toLowerCase()}${rest.required ? '*' : ''}`;
+    let rest_without_required = { ...rest };
+    delete rest_without_required.required;
+    return <FormGroup>
+        <ControlLabel htmlFor={rest.id}>{label}</ControlLabel>
+        <Field className="form-control" {...field} {...rest_without_required} />
+        {form.touched[name] && error && <HelpBlock style={{ color: 'red' }}>{error}</HelpBlock>}
+    </FormGroup>;
+};
+
+InputElement.propTypes = {
+    field: PropTypes.shape({
+        name: PropTypes.string.required
+    }),
+    form: PropTypes.shape({
+        errors: PropTypes.array.required,
+        touched: PropTypes.array.required
+    })
+};
 
 class FormikForm extends Component {
     constructor() {
         super();
-
         uniqueId.enableUniqueIds(this);
     }
 
     render() {
-        return (
-            <Formik
-                initialValues={{
-                    name: '',
-                    email: '',
-                    isActive: false
-                }}
-                validationSchema={object().shape({
-                    name: string().required('Name is required.'),
-                    email: string().email().required('Email is required.'),
-                    isActive: bool()
-                })}
-                onSubmit={
-                    values => {
-                        event.preventDefault();
-                        alert('An user was submitted: ' + JSON.stringify(values));
-                    }
+        return <Formik
+            initialValues={{
+                artist: '',
+                title: '',
+                genre: ''
+            }}
+            validationSchema={object().shape({
+                artist: string().required().max(250),
+                title: string().required().max(500),
+                genre: string().required().max(100)
+            })}
+            onSubmit={
+                values => {
+                    event.preventDefault();
+                    alert('An album was submitted: ' + JSON.stringify(values));
                 }
-                render={({ values, errors, touched, handleChange, handleSubmit, isSubmitting }) => (
-                    <div className="row">
-                        <div className="col-sm-12 col-md-7">
-                            <div className="panel panel-default">
-                                <div className="panel-body">
-                                    <form method="post" onSubmit={handleSubmit}>
-                                        <DjangoCSRFToken />
-                                        <div className="form-group">
-                                            <label htmlFor={this.nextUniqueId()}>Name:</label>
-                                            <input
-                                                id={this.lastUniqueId()}
-                                                name="name"
-                                                type="text"
-                                                value={values.name}
-                                                onChange={handleChange}
-                                                className="form-control"
-                                            />
-                                            {touched.name && errors.name && <div>{errors.name}</div>}
-                                        </div>
+            }
+            render={({ isSubmitting }) => (
+                <Row>
+                    <Col sm={12} md={7}>
+                        <Panel>
+                            <Panel.Body>
+                                <Form>
+                                    <DjangoCSRFToken />
+                                    <Field component={InputElement} name="artist" id={this.nextUniqueId()} required />
+                                    <Field component={InputElement} name="title" id={this.nextUniqueId()} required />
+                                    <Field component={InputElement} name="genre" id={this.nextUniqueId()} required />
 
-                                        <div className="form-group">
-                                            <label htmlFor={this.nextUniqueId()}>Email:</label>
-                                            <input
-                                                id={this.lastUniqueId()}
-                                                name="email"
-                                                type="email"
-                                                value={values.email}
-                                                onChange={handleChange}
-                                                className="form-control"
-                                            />
-                                            {touched.email && errors.email && <div>{errors.email}</div>}
-                                        </div>
-
-                                        <div className="form-group">
-                                            <label htmlFor={this.nextUniqueId()}>Is active:</label>
-                                            <input
-                                                id={this.lastUniqueId()}
-                                                name="isActive"
-                                                type="checkbox"
-                                                checked={values.isActive}
-                                                onChange={handleChange}
-                                            />
-                                            {touched.isActive && errors.isActive && <div>{errors.isActive}</div>}
-                                        </div>
-
-                                        <div className="form-group">
-                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">Add User
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-                }
-            />
-        );
+                                    <FormGroup>
+                                        <Button type="submit" disabled={isSubmitting} bsStyle="primary">Add Album</Button>
+                                    </FormGroup>
+                                </Form>
+                            </Panel.Body>
+                        </Panel>
+                    </Col>
+                </Row>
+            )
+            }
+        />;
     }
 }
 
