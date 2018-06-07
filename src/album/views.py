@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import requires_csrf_token
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from braces.views import SetHeadlineMixin
@@ -29,6 +31,8 @@ class AlbumDetail(SearchFormMixin, DetailView, UpdateView):
         return reverse('albums:detail', kwargs=self.kwargs)
 
 
+# CSRF token for React form
+@method_decorator(requires_csrf_token, name='dispatch')
 class AlbumCreate(LoginRequiredMixin, SetHeadlineMixin, SearchFormMixin, CreateView):
     model = Album
     form_class = album.forms.AlbumForm
