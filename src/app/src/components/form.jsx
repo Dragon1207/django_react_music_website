@@ -6,8 +6,15 @@ import { bool, object, string } from 'yup';
 import DjangoCSRFToken from 'django-react-csrftoken';
 import { Formik } from 'formik';
 import { hot } from 'react-hot-loader';
+import uniqueId from 'react-html-id';
 
 class FormikForm extends Component {
+    constructor() {
+        super();
+
+        uniqueId.enableUniqueIds(this);
+    }
+
     render() {
         return (
             <Formik
@@ -34,39 +41,48 @@ class FormikForm extends Component {
                                 <div className="panel-body">
                                     <form method="post" onSubmit={handleSubmit}>
                                         <DjangoCSRFToken />
-                                        <label>Name:
+                                        <div className="form-group">
+                                            <label htmlFor={this.nextUniqueId()}>Name:</label>
                                             <input
+                                                id={this.lastUniqueId()}
                                                 name="name"
-                                                id="name"
                                                 type="text"
                                                 value={values.name}
                                                 onChange={handleChange}
+                                                className="form-control"
                                             />
-                                        </label>
-                                        {touched.name && errors.name && <div>{errors.name}</div>}
+                                            {touched.name && errors.name && <div>{errors.name}</div>}
+                                        </div>
 
-                                        <label>Email:
+                                        <div className="form-group">
+                                            <label htmlFor={this.nextUniqueId()}>Email:</label>
                                             <input
+                                                id={this.lastUniqueId()}
                                                 name="email"
-                                                type="text"
+                                                type="email"
                                                 value={values.email}
                                                 onChange={handleChange}
+                                                className="form-control"
                                             />
-                                        </label>
-                                        {touched.email && errors.email && <div>{errors.email}</div>}
+                                            {touched.email && errors.email && <div>{errors.email}</div>}
+                                        </div>
 
-                                        <label>Is active:
+                                        <div className="form-group">
+                                            <label htmlFor={this.nextUniqueId()}>Is active:</label>
                                             <input
+                                                id={this.lastUniqueId()}
                                                 name="isActive"
                                                 type="checkbox"
                                                 checked={values.isActive}
                                                 onChange={handleChange}
                                             />
-                                        </label>
-                                        {touched.isActive && errors.isActive && <div>{errors.isActive}</div>}
+                                            {touched.isActive && errors.isActive && <div>{errors.isActive}</div>}
+                                        </div>
 
-                                        <button type="submit" disabled={isSubmitting}>Add User
-                                        </button>
+                                        <div className="form-group">
+                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">Add User
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
