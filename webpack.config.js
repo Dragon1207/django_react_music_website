@@ -144,7 +144,7 @@
                     library: 'react_app'
                 },
                 resolve: {
-                    extensions: ['.js', '.jsx', '.json']
+                    extensions: ['.js', '.jsx', '.json', '.css']
                 },
                 module: {
                     rules: [{
@@ -157,17 +157,12 @@
                         }
                     }, {
                         test: /\.css(\?|$)/,
-                        use: extractMainCss.extract({
-                            use: [
-                                isDevMode ? 'css-loader' : 'css-loader?minimize', 'postcss-loader'
-                            ]
-                        }),
-                        exclude: /node_modules/,
+                        use: [
+                            'style-loader', isDevMode ? 'css-loader' : 'css-loader?minimize', 'postcss-loader'
+                        ],
+                        exclude: /node_modules\/(?!(react-tag-input\/example\/reactTags.css))/
                     }]
                 },
-                plugins: [
-                    extractMainCss
-                ]
             });
 
             return [djangoVendorConfig, djangoMainConfig, reactVendorConfig, reactMainConfig];
