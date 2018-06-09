@@ -5,10 +5,10 @@ python:
   - 3.6
 env:
   - SECRET_KEY=dumb_secret_key_for_travis
-before_install: npm install
+before_install: yarn install
 install:
   - pip install -r requirements/dev.txt
-  - npm run dev
+  - yarn run build
 before_script:
   - cd src
 script:
