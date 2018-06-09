@@ -30,12 +30,21 @@ class FormikForm extends Component {
                 genre: string().required().max(100)
             })}
             onSubmit={
-                (values, { setSubmitting }) => {
-                    event.preventDefault();
-                    setTimeout(() => {
-                        alert('An album was submitted: ' + JSON.stringify(values));
-                        setSubmitting(false);
-                    }, 1000);
+                (values) => {
+                    const data = new FormData(event.target);
+                    data.set('tags', values.tags.map(e => e.id));
+                    fetch(location.pathname, {
+                        method: 'POST',
+                        body: data,
+                        credentials: 'include'
+                    }).then(
+                        data => {
+                            if (data) {
+                                window.location.replace(`/albums/${values.artist}-${values.title}`);
+                            } else {
+                                alert('You entered some invalid data');
+                            }
+                        });
                 }
             }
             render={({ errors, touched, isSubmitting, setFieldValue }) => (

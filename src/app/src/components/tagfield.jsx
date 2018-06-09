@@ -30,19 +30,24 @@ export default class TagField extends Component {
             ]
         };
         this.name = this.props.field.name;
+        this.updateProps();
     }
 
+    updateProps = () => { this.props.onChange(this.name, this.state.tags); }
+
     handleAddition = (tag) => {
-        this.setState(state => ({ tags: [...state.tags, tag] }), () => {
-            this.props.onChange(this.name, this.state.tags);
-        });
+        this.setState(state => ({ tags: [...state.tags, tag] }),
+            () => { this.updateProps(); }
+        );
     }
 
     handleDelete = (i) => {
         const { tags } = this.state;
         this.setState({
             tags: tags.filter((tag, index) => index !== i),
-        }, () => { this.props.onChange(this.name, this.state.tags); });
+        },
+        () => { this.updateProps(); }
+        );
     }
 
     handleDrag = (tag, currPos, newPos) => {

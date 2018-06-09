@@ -39,11 +39,13 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 )
 THIRD_PARTY_APPS = ('crispy_forms', 'django.contrib.sites', 'allauth', 'allauth.account', 'allauth.socialaccount',
-                    'rest_framework', 'easy_thumbnails', 'taggit', 'taggit_selectize', 'webpack_loader')
+                    'rest_framework', 'easy_thumbnails', 'taggit', 'taggit_selectize', 'webpack_loader',
+                    'debug_toolbar')
 LOCAL_APPS = ('album', 'track', 'search', 'core')
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
