@@ -37,14 +37,13 @@ class FormikForm extends Component {
                         method: 'POST',
                         body: data,
                         credentials: 'include'
-                    }).then(
-                        data => {
-                            if (data) {
-                                window.location.replace(`/albums/${values.artist}-${values.title}`);
-                            } else {
-                                alert('You entered some invalid data');
-                            }
-                        });
+                    }).then(data => {
+                        if (data) {
+                            window.location.href = data.url;
+                        } else {
+                            alert('You entered some invalid data');
+                        }
+                    });
                 }
             }
             render={({ errors, touched, isSubmitting, setFieldValue }) => (
@@ -60,12 +59,12 @@ class FormikForm extends Component {
 
                                     <FormGroup>
                                         <ControlLabel htmlFor={this.nextUniqueId()}>Album logo</ControlLabel>
-                                        <Field name="logo" id={this.lastUniqueId()} type="file"
+                                        <Field name="album_logo" id={this.lastUniqueId()} type="file"
                                             className="form-control-file" onChange={(event) => {
                                                 setFieldValue('file', event.currentTarget.files[0]);
                                             }} />
-                                        {touched.logo && errors.logo &&
-                                            <HelpBlock style={{ color: 'red' }}>{errors.logo}</HelpBlock>}
+                                        {touched.album_logo && errors.album_logo &&
+                                            <HelpBlock style={{ color: 'red' }}>{errors.album_logo}</HelpBlock>}
                                     </FormGroup>
 
                                     <Field component={TagField} name="tags" onChange={setFieldValue} />
