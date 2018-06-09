@@ -9,6 +9,7 @@ Django-based Music website created during the video serie [Django Tutorials for 
 Used technologies:
 
 - Python & Django
+- Album Creating form created in React
 - Testing: Selenium & Headless Chrome & Factory Boy
 - Assets management: NPM & Webpack
 - Travis CI
