@@ -88,7 +88,7 @@
         "watch": "webpack -d --mode development --config webpack.config.js --watch",
         "build": "webpack -d --mode development --config ./webpack.config.js --progress && yarn run collectstatic",
         "build:prod": "webpack -p --mode production --config ./webpack.config.js --progress",
-        "collectstatic": "activate Django && python ./src/manage.py collectstatic --noinput",
+        "collectstatic": "python ./src/manage.py collectstatic --noinput",
         "heroku-postbuild": "yarn run build"
     }
 }
