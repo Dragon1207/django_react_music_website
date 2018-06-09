@@ -9,6 +9,8 @@ before_install: yarn install
 install:
   - pip install -r requirements/dev.txt
   - yarn run build
+  - ls /home/travis/build/osya/music_website/static
+  - ls /home/travis/build/osya/music_website/static/static
 before_script:
   - cd src
 script:

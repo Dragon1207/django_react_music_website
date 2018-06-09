@@ -86,7 +86,7 @@
     "scripts": {
         "start": "webpack-dev-server --inline --hot --progress --port 3000 --mode development",
         "watch": "webpack -d --mode development --config webpack.config.js --watch",
-        "build": "webpack -d --mode development --config ./webpack.config.js --progress && yarn run collectstatic",
+        "build": "webpack -d --mode development --config ./webpack.config.js --progress",
         "build:prod": "webpack -p --mode production --config ./webpack.config.js --progress",
         "collectstatic": "python ./src/manage.py collectstatic --noinput",
         "heroku-postbuild": "yarn run build"
