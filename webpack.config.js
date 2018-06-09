@@ -5,7 +5,7 @@
     const CleanWebpackPlugin = require('clean-webpack-plugin');
 
     (function (extractMainCss, extractVendorCss, webpack) {
-        module.exports = (argv) => {
+        module.exports = (env, argv) => {
             const BundleTracker = require('webpack-bundle-tracker');
             const path = require('path');
             const isDevMode = argv.mode === 'development';
