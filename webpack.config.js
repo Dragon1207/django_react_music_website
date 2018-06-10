@@ -170,3 +170,5 @@
         };
     }(new ExtractTextPlugin('[name].[chunkhash].css'), new ExtractTextPlugin('[name].css'), new require('webpack')));
 }());
+
+// TODO: `extract-text-webpack-plugin` is deprecated for handling CSS in webpack 4. That's why you got the deprecation warning. Try using `mini-css-extract-plugin` instead (https://github.com/webpack/webpack/issues/6643#issuecomment-379728360)
