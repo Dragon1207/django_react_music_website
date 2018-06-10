@@ -8,10 +8,10 @@ Django-based Music website created during the video serie [Django Tutorials for 
 
 Used technologies:
 
-- Python & Django
-- Album Creating form created in React
-- Testing: Selenium & Headless Chrome & Factory Boy
-- Assets management: NPM & Webpack
+- [Python](https://github.com/python) & [Django](https://github.com/django/django)
+- Album Creating form created in [React](https://github.com/facebook/react) & [Formik](https://github.com/jaredpalmer/formik)
+- Testing: [Selenium](https://github.com/SeleniumHQ/selenium) & Headless Chrome & [Factory Boy](https://github.com/FactoryBoy/factory_boy)
+- Assets management: [Yarn](https://github.com/yarnpkg/yarn) & [Webpack](https://github.com/webpack)
 - Travis CI
 - Deployed at [Heroku](https://django-music-website.herokuapp.com)
 
@@ -21,8 +21,8 @@ Used technologies:
     git clone https://github.com/osya/music_website
     cd music_website
     pip install -r requirements.txt
-    npm install
-    npm run build
+    yarn install
+    yarn run build
     python manage.py collectstatic
     python manage.py runserver
 ```
